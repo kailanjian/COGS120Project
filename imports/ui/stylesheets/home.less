@@ -1,5 +1,15 @@
 body {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5 !important;
+}
+
+.recipeItem {
+  color: black;
+  border-top: 1px solid #dbdbdb;
+}
+
+.recipeItem:hover, .recipeItem:focus, .recipeItem:active {
+  color: black;
+  text-decoration: none;
 }
 
 .titleBar {
@@ -11,14 +21,65 @@ body {
 
 .titleBar .title{
   margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .searchBar {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
-.searchInput {
+.filterButton {
+  color: white;
+  background-color: #8c8c8c;
+  
+}
+
+.navButton {
+  font-size: 1.5rem;
+}
+
+.searchInput, .searchInput:focus {
   margin: auto;
+  background-color: #dbdbdb !important;
+  border: none;
+}
+
+.recipeItem {
+  display: block;
+
+}
+
+.recipeOuter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.recipeInner {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.recipeName {
+  font-size: 1.3rem;
+}
+.recipeDetails {
+  font-size: 0.7rem;
+}
+
+.imagePlaceholder {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 2rem;
+}
+
+.groupContent {
+  background-color: white;
 }

@@ -7,6 +7,7 @@
       </div>
       <div class="searchBar text-center">
         <input type="text" placeholder="search" class="form-control searchInput"/>
+        <button type="button" class="btn btn-default filterButton">filter</button>
       </div>
     </div>
     
@@ -17,13 +18,28 @@
 </template>
 
 <template name="recipe">
-  <a href="/view">{{this.name}}</a>
-  <br />
+  <a href="/view" class="recipeItem">
+    <div class="recipeOuter">
+      <div class="imageContainer">
+        <div class="imagePlaceholder"></div>
+      </div>
+      <div class="recipeInner">
+        <div class="recipeName">
+          {{this.name}}
+        </div>
+        <div class="recipeDetails">
+          {{this.time}} | {{this.difficulty}} | {{this.meal}}
+        </div>
+      </div>
+    </div>
+  </a>
 </template>
 
 <template name="recipeGroup">
-  <h1>{{name}}</h1>
   <div class="groupBar">
+    <span>{{name}}</span>
+  </div>
+  <div class="groupContent">
       {{#each recipes}}
         {{> recipe}}
       {{/each}}
