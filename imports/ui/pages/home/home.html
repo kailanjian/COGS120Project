@@ -1,13 +1,32 @@
 <template name="App_home">
-  <a href="/add">Add</a>
-  <h1>List of Recipes:</h1>
-  <p>[List of Recipes goes here]</p>
-  <a href="/view">Recipe 1</a>
-  <a href="/view">Recipe 2</a>
-  <a href="/view">Recipe 3</a>
-  {> recipe}
+  <div class="container">
+    <div class="top">
+      <div class="titleBar">
+        <span class="h1">recipes</span>
+        <span class="h1" id="add">-</span>
+        <span class="h1" id="add"><a href="/add">+</a></span>
+      </div>
+      <div class="searchBar text-center">
+        <input type="text" placeholder="search" class="form-control searchInput"/>
+      </div>
+    </div>
+    
+    {{#each recipeGroups}}
+      {{> recipeGroup}}
+    {{/each}}
+  </div>
 </template>
 
 <template name="recipe">
-  <p>RECIPE 4</p>
+  <a href="/view">{{this.name}}</a>
+  <br />
+</template>
+
+<template name="recipeGroup">
+  <h1>{{name}}</h1>
+  <div class="groupBar">
+      {{#each recipes}}
+        {{> recipe}}
+      {{/each}}
+  </div>
 </template>
