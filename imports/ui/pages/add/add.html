@@ -1,7 +1,13 @@
 <template name="App_add">
   <p>[Options to add go here]</p>
-  <a href="/">Cancel</a>
+
+  {{>myButton}}
+    <a href="/">Cancel</a>
   <a href="/">Submit</a>
   <a href="/load">Load From the internet</a>
   <a href="/camera">Load From the camera</a>
+</template>
+
+<template name ="myButton">
+  <button id ="button" class = "btn btn-default">BUTTON</button>
 </template>
