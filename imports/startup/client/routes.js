@@ -9,6 +9,7 @@ import '../../ui/pages/add/add.js';
 import '../../ui/pages/view/view.js';
 import '../../ui/pages/load/load.js';
 import '../../ui/pages/camera/camera.js';
+import '../../ui/pages/diet/diet.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -43,6 +44,13 @@ FlowRouter.route('/camera', {
   name: 'App.camera',
   action() {
     BlazeLayout.render('App_body', { main: 'App_camera' });
+  },
+})
+
+FlowRouter.route('/diet', {
+  name: 'App.diet',
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_diet' });
   },
 })
 

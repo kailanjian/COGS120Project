@@ -50,6 +50,15 @@ Template.App_home.helpers({
   }
 });
 
+Template.App_home.events({
+  'click .sideBarOverlay'(event) {
+    $('.sideBarOverlay').hide();
+  },
+  'click .navButtonWrapper'(event) {
+    $('.sideBarOverlay').show();
+  }
+});
+
 Template.recipeGroup.helpers({
   recipes() {
     return this.recipes;

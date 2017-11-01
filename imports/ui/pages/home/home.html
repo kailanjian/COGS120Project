@@ -3,7 +3,9 @@
     <div class="top">
       <div class="titleBar">
         <span class="h1 title">recipes</span>
-        <i class="navButton h1 fa fa-bars"></i>
+        <div class="navButtonWrapper">
+          <i class="navButton h1 fa fa-bars"></i>
+        </div>
       </div>
       <div class="searchBar text-center">
         <input type="text" placeholder="search" class="form-control searchInput"/>
@@ -14,6 +16,33 @@
     {{#each recipeGroups}}
       {{> recipeGroup}}
     {{/each}}
+  </div>
+  <div class="sideBarOverlay">
+    <div class="sideBar">
+      <div class="container">
+        <div class="sideBarUser">
+          <div class="userImg"></div>
+          <div class="userName">User's Name</div>
+        </div>
+        <a href="/diet" class="sideBarButton whiteSideBar">
+          <!-- link to new page -->
+          <div class="iconCircle"><i class="fa fa-heart"></i></div>
+          <div class="buttonTitle">diet guidelines</div>
+        </a>
+        <a href="/add" class="sideBarButton">
+          <div class="iconCircle"><i class="fa fa-pencil"></i></div>
+          <div class="buttonTitle">input recipe</div>
+        </a>
+        <a href="/load" class="sideBarButton">
+          <div class="iconCircle"><i class="fa fa-globe"></i></div>
+          <div class="buttonTitle">search web</div>
+        </a>
+        <a href="#" class="sideBarButton">
+          <div class="iconCircle"><i class="fa fa-minus"></i></div>
+          <div class="buttonTitle">remove recipe</div>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
