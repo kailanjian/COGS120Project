@@ -1,13 +1,18 @@
 <template name="App_add">
-  <p>[Options to add go here]</p>
+<div>
+ {{>camButton}}
+ {{>galleryButton}}
 
-  {{>myButton}}
+</div>
     <a href="/">Cancel</a>
   <a href="/">Submit</a>
   <a href="/load">Load From the internet</a>
-  <a href="/camera">Load From the camera</a>
 </template>
 
-<template name ="myButton">
-  <button id ="button" class = "btn btn-default">BUTTON</button>
+<template name ="camButton">
+  <button class = "camButton btn btn-default"><i class="fa fa-camera"></i></button>
+</template>
+
+<template name = "galleryButton">
+  <button class = "galleryButton btn btn-default"><i class="fa fa-picture-o"></i></button>
 </template>

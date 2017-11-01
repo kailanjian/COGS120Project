@@ -5,11 +5,14 @@ import './add.html';
 import '../../components/nav/nav.js';
 
 
-Template.myButton.events({
-    'click #button': function(e){
+Template.camButton.events({
+    'click .camButton': function(e){
         e.preventDefault();
         console.log("pressed bois");
         FlowRouter.go('/camera')
-    
     }
+});
+
+$("#first").click(function () {
+    $("#uploadfile").click();
 });
