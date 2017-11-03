@@ -10,10 +10,17 @@ import '../../ui/pages/view/view.js';
 import '../../ui/pages/load/load.js';
 import '../../ui/pages/camera/camera.js';
 import '../../ui/pages/diet/diet.js';
+import '../../ui/pages/login/login.js';
+import '../../ui/pages/signup/signup.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
   name: 'App.home',
+  // figure out how to apply this trigger to all login pages
+  triggersEnter: [function(context, redirect) {
+    if (!Meteor.user() && !Meteor.loggingIn())
+      redirect('/login');
+  }],
   action() {
     BlazeLayout.render('App_body', { main: 'App_home' });
   },
@@ -53,6 +60,21 @@ FlowRouter.route('/diet', {
     BlazeLayout.render('App_body', { main: 'App_diet' });
   },
 })
+
+FlowRouter.route('/login', {
+  name: 'App.login',
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_login' });
+  },
+})
+
+FlowRouter.route('/signup', {
+  name: 'App.signup',
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_signup' });
+  },
+});
+
 
 FlowRouter.notFound = {
   action() {
