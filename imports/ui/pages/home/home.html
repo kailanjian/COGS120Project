@@ -46,18 +46,22 @@
   </div>
 </template>
 
+<!-- Display a Recipe -->
 <template name="recipe">
   <a href="/view" class="recipeItem">
     <div class="recipeOuter">
+      <div class="deleteButton">
+        <span class="fa fa-trash deleteIcon"></span>
+      </div>
       <div class="imageContainer">
         <div class="imagePlaceholder"></div>
       </div>
       <div class="recipeInner">
         <div class="recipeName">
-          {{this.name}}
+          {{name}}
         </div>
         <div class="recipeDetails">
-          {{this.time}} | {{this.difficulty}} | {{this.meal}}
+          {{time}} | {{difficulty}} | {{meal}}
         </div>
       </div>
     </div>
@@ -65,12 +69,14 @@
 </template>
 
 <template name="recipeGroup">
-  <div class="groupBar">
-    <span>{{name}}</span>
-  </div>
-  <div class="groupContent">
-      {{#each recipes}}
-        {{> recipe}}
-      {{/each}}
-  </div>
+  {{#if recipes}}
+    <div class="groupBar">
+      <span>{{name}}</span>
+    </div>
+    <div class="groupContent">
+        {{#each recipes}}
+          {{> recipe}}
+        {{/each}}
+    </div>
+  {{/if}}
 </template>

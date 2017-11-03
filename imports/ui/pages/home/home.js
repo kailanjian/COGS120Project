@@ -1,54 +1,53 @@
+import { Recipes } from '/imports/api/recipes/recipes.js';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 import './home.html';
 
+
+
 var recipes = [{name: "recipe 1"}, {name: "recipe 2"}, {name: "recipe 3"}];
-var recipeGroups = 
-  [
-    {
-      name: "Recommended Based on Diet Restrictions", 
-      recipes: [
-        {name: "Recommended Breakfast",
-         time: "30 min",
-         difficulty: "easy",
-         meal: "breakfast"}, 
-        {name: "Recommended Lunch",
-        time: "40 min",
-        difficulty: "hard",
-        meal: "lunch"}, 
-        {name: "Recommended Dinner",
-        time: "20 min",
-        difficulty: "med",
-        meal: "dinner"}]
-    },
-    {
-      name: "A",
-      recipes: [
-        {name: "Apple Pie",
-        time: "40 min",
-        difficulty: "hard",
-        meal: "desert"}, 
-        {name: "Avocado dip",
-        time: "20 min",
-        difficulty: "med",
-        meal: "appetizer"}]
-    },
-    {
-      name: "C",
-      recipes: [
-        {name: "Chicken McNuggets",
-        time: "20 min",
-        difficulty: "easy",
-        meal: "lunch"}]
-    }
-  ]
+var recipeGroups;
+
+Template.App_home.onCreated(function() {
+
+  recipeGroups = 
+    [
+      {
+        name: "Recommended Based on Diet Restrictions", 
+        classifier: function(recipe) {
+          if (recipe.difficulty == "easy") {
+            return true;
+          }
+        }
+      },
+    ];
+  var aCode = "a".charCodeAt(0);
+  var zCode = "z".charCodeAt(0);
+  for (let i = aCode; i <= zCode; i++) {
+    let char = String.fromCharCode(i);
+    recipeGroups.push(
+      {
+        name: char.toUpperCase(),
+        classifier: function(recipe) {
+          return (recipe.name.charAt(0).toUpperCase() == char.toUpperCase());
+        }
+      }
+    )
+  }
+});
 
 
 Template.App_home.helpers({
   recipeGroups() {
     return recipeGroups;
+  },
+  recipes() {
+    return Recipes.find({});
   }
 });
+
 
 Template.App_home.events({
   'click .sideBarOverlay'(event) {
@@ -58,12 +57,36 @@ Template.App_home.events({
     $('.sideBarOverlay').show();
   },
   'click .removeRecipeButton'(event) {
-    $('.minus').show();
-  }
+    $('.deleteButton').show();
+  },
+});
+
+Template.recipeGroup.onCreated(function () { 
+  Meteor.subscribe('recipes.all');
 });
 
 Template.recipeGroup.helpers({
   recipes() {
-    return this.recipes;
+    console.log(this);
+    var classifier = this.classifier;
+    let cursor = Recipes.find({$where: function() {return classifier(this)}});
+    if (cursor.count() > 0)
+      return cursor
+    else 
+      return 0;
   }
+})
+
+Template.recipe.events({
+  'click .minus'(event) {
+    event.preventDefault();
+    console.log("minus clicked");
+    console.log(this._id);
+    Meteor.call("recipes.delete", this._id);
+  }
+})
+
+Template.recipe.onRendered(function() {
+  // initialize states
+  $('.deleteButton').hide();
 })
