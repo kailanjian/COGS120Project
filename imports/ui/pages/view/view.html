@@ -1,4 +1,17 @@
 <template name="App_view">
   <a href="/">Home</a>
-  <p>[Insert place to view recipe details here]</p>
+  {{#with currentRecipe}}
+  <div class="container">
+    <div class="top">
+      <div class="titleBar">
+        <span class="h1 title">{{name}}</span>
+      </div>
+    </div>
+    <div class="infoBar">
+      <span class="h4">{{difficulty}} difficulty, </span>
+      <span class="h4">{{time}} preparation time, </span>
+      <span class="h4">makes {{servings}} servings</span>
+    </div>
+  </div>
+  {{/with}}
 </template>

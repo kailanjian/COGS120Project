@@ -33,7 +33,7 @@ FlowRouter.route('/add', {
   },
 })
 
-FlowRouter.route('/view', {
+FlowRouter.route('/view/:id', {
   name: 'App.view',
   action() {
     BlazeLayout.render('App_body', { main: 'App_view' });
