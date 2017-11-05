@@ -78,7 +78,7 @@ Template.recipeGroup.helpers({
 })
 
 Template.recipe.events({
-  'click .minus'(event) {
+  'click .deleteButton'(event) {
     event.preventDefault();
     console.log("minus clicked");
     console.log(this._id);

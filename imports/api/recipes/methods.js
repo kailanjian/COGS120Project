@@ -5,18 +5,20 @@ import { check } from 'meteor/check';
 import { Recipes } from './recipes.js';
 
 Meteor.methods({
-  'recipes.insert'(name, time, difficulty, meal, owner) {
-    check(name, String);
-    check(time, String);
-    check(difficulty, String);
-    check(meal, String);
-    check(owner, String);
+  'recipes.insert'(
+      name, time, difficulty, 
+      meal, servings, ingredients, 
+      instructions, keywords, owner) {
 
     return Recipes.insert({
       name: name,
-      time: ime,
+      time: time,
       difficulty: difficulty,
       meal: meal,
+      servings: servings,
+      ingredients: ingredients,
+      instructions: instructions,
+      keywords: keywords,
       owner: owner,
     });
   },
