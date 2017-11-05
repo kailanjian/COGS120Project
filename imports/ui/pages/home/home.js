@@ -10,8 +10,10 @@ import './home.html';
 var recipes = [{name: "recipe 1"}, {name: "recipe 2"}, {name: "recipe 3"}];
 var recipeGroups;
 var searchText;
+var subscription;
 
 Template.App_home.onCreated(function() {
+  subscription = Meteor.subscribe('recipes.user');
   searchText  = new ReactiveVar("");
 
   recipeGroups = 
@@ -40,7 +42,6 @@ Template.App_home.onCreated(function() {
   }
 });
 
-
 Template.App_home.helpers({
   recipeGroups() {
     return recipeGroups;
@@ -58,6 +59,13 @@ Template.App_home.events({
   'click .removeRecipeButton'(event) {
     $('.deleteButton').show();
   },
+  'click .logoutButton'(event) {
+    Meteor.logout();
+    if (subscription) {
+      subscription.stop();
+    }
+    FlowRouter.go('/login');
+  },
   'input .searchBar'(event) {
     let text = $(".searchInput").val();
     searchText.set(text);
@@ -66,7 +74,6 @@ Template.App_home.events({
 });
 
 Template.recipeGroup.onCreated(function () { 
-  Meteor.subscribe('recipes.all');
 });
 
 Template.recipeGroup.helpers({
