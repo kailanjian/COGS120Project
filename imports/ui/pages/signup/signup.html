@@ -1,10 +1,32 @@
 <template name="App_signup">
-  [signup page]
+  <div class = "centered">
+    <b class = "SignUp">
+      Sign Up
+    </b>
+  </div>
   <form id="signupForm">
-    <input type="text" id="nameInput" placeholder="Name" />
-    <input type="text" placeholder="Email Address" id="emailInput" />
-    <input type="password" placeholder="Password" id="passwordInput" />
-    <input type="password" placeholder="Confirm Password" id="passwordConfirmInput" />
-    <input type="submit" value="Signup" />
+    <div class = "centered col-xs-12">
+      <input type="text" id="nameInput" placeholder="Name" class="typing" />
+    </div>
+
+    <div class = "centered col-xs-12">
+      <input class = "typing" type="text" placeholder="Email Address" id="emailInput" />
+    </div>
+    
+    <div class = "centered col-xs-12">
+        <input class = "typing" type="password" placeholder="Password" id="passwordInput" />  
+    </div>
+    
+    <div class = "centered col-xs-12">
+        <input class= "typing" type="password" placeholder="Confirm Password" id="passwordConfirmInput" />
+    </div>
+    
+    <div class = "centered">
+      <input type="submit" value="Signup" id ="submitButton" />
+    </div>
   </form>
+  <div class = "centered col-xs-12">
+      <button id = "cancelButton">Cancel</button>
+  </div>
+    
 </template>
