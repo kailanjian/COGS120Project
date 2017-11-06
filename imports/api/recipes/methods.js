@@ -22,6 +22,22 @@ Meteor.methods({
       owner: owner,
     });
   },
+  'recipes.update'(id, name, time, difficulty,
+      meal, servings, ingredients,
+      instructions, keywords, owner) {
+      
+      return Recipes.update(id, { $set: {
+        name: name,
+        time: time,
+        difficulty: difficulty,
+        meal: meal,
+        servings: servings,
+        ingredients: ingredients,
+        instructions: instructions,
+        keywords: keywords,
+        owner: owner }
+      } )
+  },
   'recipes.delete'(_id) {
     return Recipes.remove(_id);
   },

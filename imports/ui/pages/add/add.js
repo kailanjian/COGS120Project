@@ -1,23 +1,42 @@
 import './add.html';
 
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipes/recipes.js';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
 
-var id;
+var id = new ReactiveVar("");
 
 function initializePage() {
   // initialize page data
-  id = FlowRouter.current().params.id;
-  let recipe = Recipes.findOne(id)
-  if (!id)
+  id.set(FlowRouter.current().params.id);
+  let recipe = Recipes.findOne(id.get())
+  if (!id.get())
     return;
 
   $(".recipe_name").val(recipe.name);
-  // TODO add in rest of page stuff
-  // TODO add flag to mark page as to update rather than to save
+  $("#servingsInput").val(recipe.servings);
+  $("#timeInput").val(recipe.time);
+  $(".ingredients").val(recipe.ingredients);
+  $(".instructions").val(recipe.instructions);
+  $(".keywords").val(recipe.keywords);
+  difficultyInput = recipe.difficulty;
+  mealInput = recipe.meal;
+  $(".difficulty_and_servings .selector_buttons").each(function() {
+      console.log(this);
+      console.log($(this));
+      if ($(this)[0].outerText == difficultyInput) {
+          console.log("matched");
+          $(this).css("background-color", "#DEDEDE");
+      }
+  })
+  $(".meal .selector_buttons").each(function() {
+    if ($(this)[0].outerText == mealInput) {
+        $(this).css("background-color", "#DEDEDE");
+    }
+  });
 }
 
 Template.App_add.onCreated(function() {
@@ -29,6 +48,13 @@ Template.App_add.onCreated(function() {
     $(".recipe_name").val(recipe.name);
   }
   */
+})
+
+Template.App_add.helpers({
+    id() {
+        console.log("id helper ran: " + id);
+        return id.get();
+    }
 })
 
 Template.App_add.events({
@@ -45,16 +71,31 @@ Template.App_add.events({
         let instructions = $("#instructionsInput").val();
         let keywords = $("#keywordsInput").val();
 
-        Meteor.call('recipes.insert', 
-            name, 
-            time, 
-            difficulty, 
-            meal, 
-            servings,
-            ingredients,
-            instructions,
-            keywords,
-            Meteor.userId())
+        if (id) {
+            Meteor.call('recipes.update', id,
+                name,
+                time,
+                difficulty,
+                meal,
+                servings,
+                ingredients,
+                instructions,
+                keywords,
+                Meteor.userId());
+
+        } else {
+
+            Meteor.call('recipes.insert', 
+                name, 
+                time, 
+                difficulty, 
+                meal, 
+                servings,
+                ingredients,
+                instructions,
+                keywords,
+                Meteor.userId())
+        }
     }
 });
 
