@@ -9,8 +9,12 @@ import './home.html';
 
 var recipes = [{name: "recipe 1"}, {name: "recipe 2"}, {name: "recipe 3"}];
 var recipeGroups;
+var searchText;
+var subscription;
 
 Template.App_home.onCreated(function() {
+  subscription = Meteor.subscribe('recipes.user');
+  searchText  = new ReactiveVar("");
 
   recipeGroups = 
     [
@@ -38,14 +42,10 @@ Template.App_home.onCreated(function() {
   }
 });
 
-
 Template.App_home.helpers({
   recipeGroups() {
     return recipeGroups;
   },
-  recipes() {
-    return Recipes.find({});
-  }
 });
 
 
@@ -59,26 +59,49 @@ Template.App_home.events({
   'click .removeRecipeButton'(event) {
     $('.deleteButton').show();
   },
+  'click .logoutButton'(event) {
+    Meteor.logout();
+    if (subscription) {
+      subscription.stop();
+    }
+    FlowRouter.go('/login');
+  },
+  'input .searchBar'(event) {
+    let text = $(".searchInput").val();
+    searchText.set(text);
+    console.log(text);
+  }
 });
 
 Template.recipeGroup.onCreated(function () { 
-  Meteor.subscribe('recipes.all');
 });
 
 Template.recipeGroup.helpers({
   recipes() {
     console.log(this);
     var classifier = this.classifier;
-    let cursor = Recipes.find({$where: function() {return classifier(this)}});
-    if (cursor.count() > 0)
-      return cursor
+    // important to activate Tracker
+    var search = searchText.get();
+    var filteredClassifier = function(recipe) {
+      if (classifier(recipe) && recipe.name.match(new RegExp(search, 'i'))){
+        return true;
+      }
+      return false;
+    }
+    
+    let cursor = Recipes.find({$where: function() {
+      return filteredClassifier(this)
+    }});
+    if (cursor.count() > 0) {
+      return cursor;
+    }
     else 
       return 0;
   }
 })
 
 Template.recipe.events({
-  'click .minus'(event) {
+  'click .deleteButton'(event) {
     event.preventDefault();
     console.log("minus clicked");
     console.log(this._id);

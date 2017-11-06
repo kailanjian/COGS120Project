@@ -41,6 +41,10 @@
           <div class="iconCircle"><i class="fa fa-minus"></i></div>
           <div class="buttonTitle">remove recipe</div>
         </a>
+        <a href="#" class="sideBarButton logoutButton">
+          <div class="iconCircle"><i class="fa fa-sign-out"></i></div>
+          <div class="buttonTitle">Log Out</div>
+        </a>
       </div>
     </div>
   </div>
@@ -48,7 +52,7 @@
 
 <!-- Display a Recipe -->
 <template name="recipe">
-  <a href="/view" class="recipeItem">
+  <a href="/view/{{_id}}" class="recipeItem">
     <div class="recipeOuter">
       <div class="deleteButton">
         <span class="fa fa-trash deleteIcon"></span>

@@ -11,6 +11,10 @@ export const Recipes = new Mongo.Collection('recipes');
   time: recipe time
   difficulty: recipe difficulty
   meal: breakfast, lunch, or dinner
+  servings:
+  ingredients:
+  instructions:
+  keywords:
   owner: userId of owner
 }
 */
