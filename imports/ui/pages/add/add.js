@@ -71,8 +71,8 @@ Template.App_add.events({
         let instructions = $("#instructionsInput").val();
         let keywords = $("#keywordsInput").val();
 
-        if (id) {
-            Meteor.call('recipes.update', id,
+        if (id.get()) {
+            Meteor.call('recipes.update', id.get(),
                 name,
                 time,
                 difficulty,
