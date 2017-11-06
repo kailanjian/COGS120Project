@@ -1,17 +1,50 @@
 <template name="App_view">
-  <a href="/">Home</a>
   {{#with currentRecipe}}
-  <div class="container">
-    <div class="top">
-      <div class="titleBar">
-        <span class="h1 title">{{name}}</span>
+  <div class="picture_holder">
+    <img class="recipeImg" />
+  </div>
+  <div>
+    <div class="container">
+      <div class="view_recipe_name">{{name}}</div>
+      <div class="difficulty_and_servings">
+        <div class="inline">
+          <span>{{difficulty}} difficulty</span>
+        </div>
+        <div class="inline text_and_input">
+          <span>{{servings}} servings</span>
+        </div>
+      </div>
+      <div class="meal">
+        <div class="inline">
+          <span>{{meal}}</span>
+        </div>
+        <div class="text_and_input time">
+          <span>preparation time: {{time}}</span>
+        </div>
+      </div>
+      <div class="recipeImgContainer">
+        <!--// recipe image here-->
+      </div>
+      <div>
+        <span class="h2">Ingredients: </span>
+        <br />
+        <span>{{ingredients}}</span>
+
+        <br />
+        <span class="h2">Instructions: </span>
+        <br />
+        <span>{{instructions}}</span>
+        
+        <br />
+        <span class="h2">Keywords: </span>
+        <br />
+        <span>{{keywords}}</span>
       </div>
     </div>
-    <div class="infoBar">
-      <span class="h4">{{difficulty}} difficulty, </span>
-      <span class="h4">{{time}} preparation time, </span>
-      <span class="h4">makes {{servings}} servings</span>
-    </div>
+  </div>
+  <div class="go_home">
+    <a href="/" id="homeButton" class="btn btn-default bottom_buttons">home</a>
+    <a href="/add/{{_id}}" id="editButton" class="btn btn-default bottom_buttons">edit</a>
   </div>
   {{/with}}
 </template>

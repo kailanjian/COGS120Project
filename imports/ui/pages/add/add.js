@@ -1,12 +1,34 @@
 import './add.html';
 
 import { Meteor } from 'meteor/meteor';
+import { Recipes } from '/imports/api/recipes/recipes.js';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
-Template.App_add.onCreated(function() {
-  // initialize page data
 
+var id;
+
+function initializePage() {
+  // initialize page data
+  id = FlowRouter.current().params.id;
+  let recipe = Recipes.findOne(id)
+  if (!id)
+    return;
+
+  $(".recipe_name").val(recipe.name);
+  // TODO add in rest of page stuff
+  // TODO add flag to mark page as to update rather than to save
+}
+
+Template.App_add.onCreated(function() {
+  Meteor.subscribe("recipes.user", function() {
+    initializePage();
+  });
+  /*
+  if (id) {
+    $(".recipe_name").val(recipe.name);
+  }
+  */
 })
 
 Template.App_add.events({
