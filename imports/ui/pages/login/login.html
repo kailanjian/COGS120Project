@@ -1,9 +1,27 @@
-<template name="App_login">
-  [login page]
+<template name="App_login" id = "AppLOGIN">
+  <div class = "centered">
+    <b class = "TitleName">
+        RecipeMap   
+    </b>
+  </div>
   <form id="loginForm">
-    <input type="text" id="emailInput" placeholder="Email Address" />
-    <input type="password" id="passwordInput" placeholder="Password" />
-    <input type="submit" id="loginForm" value="Login"/>
-  </form>
-  <a href="/signup">Don't have an account? Sign Up</a>
+    <div class = "centered email col-xs-12">
+      <input class = "Input" type="text" id="emailInput" placeholder="Email Address" />
+    </div>
+    
+    <div class = "centered password col-xs-12">  
+      <input class = "Input" type="password" id="passwordInput" placeholder="Password" />
+    </div>
+    
+    <div class = "centered login">
+      <input type="submit" value="Login" id = "loginButton"/>
+    </div>
+    </form>
+    
+    <div class = "centered">
+        <a href="/signup" id = "newUser" >New User? Sign Up</a>
+    </div>
+
+
 </template>
+

@@ -9,7 +9,7 @@ Template.App_signup.events({
     let name = $("#nameInput").val();
 
     if (password != passConfirm) {
-      alert("u scrub the passwords dont match");
+      alert("Your passwords did not match!");
     }
 
     // TODO validate email here
@@ -20,12 +20,19 @@ Template.App_signup.events({
     }, function(error) {
       if (error) {
         // TODO better error message
-        alert("error with account!")
+        alert("Error with one of the fields!")
         console.log(error);
       } else {
-        console.log("signup success")
+        console.log("Signup was a success!")
         FlowRouter.go("/");
       }
     })
+  }
+})
+
+Template.App_signup.events({
+  "click #cancelButton"(event){
+    event.preventDefault();
+    FlowRouter.go("/login")
   }
 })

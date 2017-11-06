@@ -55,7 +55,7 @@
 
 
 <template name = "galleryButton">
-  <input id="file-input" type="file" name="name" style="display: none;" />
+  <input id="file-input" type="file" name="name" style="display: none;" accept="image/." capture = "camera"/>
   <button class = "add_food_photo_button galleryButton btn btn-default" onclick = "document.getElementById('file-input').click();"><i class="fa fa-picture-o"></i></button>
 </template>
 
