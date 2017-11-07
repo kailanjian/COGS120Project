@@ -9,7 +9,7 @@ var id = new ReactiveVar("");
 Template.App_view.onCreated(function() {
   Meteor.subscribe("recipes.user");
   Meteor.subscribe("images.all");
-  
+
   id.set(FlowRouter.current().params.id);
   console.log("set id to " + id.get);
 });

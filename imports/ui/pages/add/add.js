@@ -140,11 +140,11 @@ Template.App_add.events({
                         Meteor.userId());
                 } else {
                     console.log("inserting recipe");
-                    Meteor.call('recipes.insert', 
-                        name, 
-                        time, 
-                        difficulty, 
-                        meal, 
+                    Meteor.call('recipes.insert',
+                        name,
+                        time,
+                        difficulty,
+                        meal,
                         servings,
                         ingredients,
                         instructions,
