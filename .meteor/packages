@@ -26,3 +26,6 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 fortawesome:fontawesome
 msavin:mongol
 accounts-password
+cfs:standard-packages
+cfs:gridfs
+cfs:ui

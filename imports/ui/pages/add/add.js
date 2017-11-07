@@ -3,6 +3,7 @@ import './add.html';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipes/recipes.js';
+import { Images } from '/imports/api/images/images.js';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
@@ -15,6 +16,8 @@ function initializePage() {
   let recipe = Recipes.findOne(id.get())
   if (!id.get())
     return;
+
+    console.log("page initialized with an id");
 
   $(".recipe_name").val(recipe.name);
   $("#servingsInput").val(recipe.servings);
@@ -40,9 +43,12 @@ function initializePage() {
 }
 
 Template.App_add.onCreated(function() {
+    console.log("App_add created");
   Meteor.subscribe("recipes.user", function() {
+      console.log("subscribed to user recipes")
     initializePage();
   });
+  Meteor.subscribe("images.all");
   /*
   if (id) {
     $(".recipe_name").val(recipe.name);
@@ -71,30 +77,57 @@ Template.App_add.events({
         let instructions = $("#instructionsInput").val();
         let keywords = $("#keywordsInput").val();
 
-        if (id.get()) {
-            Meteor.call('recipes.update', id.get(),
-                name,
-                time,
-                difficulty,
-                meal,
-                servings,
-                ingredients,
-                instructions,
-                keywords,
-                Meteor.userId());
-
+        let fileInput = $("#file-input").prop("files");
+        let file = fileInput[0];
+        if (file) {
+            Images.insert(file, finishedFile); 
         } else {
+            finishedFile(undefined, undefined);
+        }
 
-            Meteor.call('recipes.insert', 
-                name, 
-                time, 
-                difficulty, 
-                meal, 
-                servings,
-                ingredients,
-                instructions,
-                keywords,
-                Meteor.userId())
+        function finishedFile(err, res) {
+            if (err) {
+                console.log("ERROR");
+                console.log(err)
+            } else {
+                console.log(res)
+                if (!file) {
+                    console.log("no file");
+                    //error, can do file validation here
+                }
+                if (id.get()) {
+                    console.log("updating recipe");
+                    console.log("id: " + id.get());
+                    console.log("name: " + name);
+                    console.log("difficulty: " + difficulty);
+                    Meteor.call('recipes.update', id.get(),
+                        name,
+                        time,
+                        difficulty,
+                        meal,
+                        servings,
+                        ingredients,
+                        instructions,
+                        keywords,
+                        res._id,
+                        "TODO",
+                        Meteor.userId());
+                } else {
+                    console.log("inserting recipe");
+                    Meteor.call('recipes.insert', 
+                        name, 
+                        time, 
+                        difficulty, 
+                        meal, 
+                        servings,
+                        ingredients,
+                        instructions,
+                        keywords,
+                        res._id,
+                        "TODO",
+                        Meteor.userId())
+                }
+            }
         }
     }
 });
