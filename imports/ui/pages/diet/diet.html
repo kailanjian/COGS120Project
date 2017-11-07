@@ -6,7 +6,36 @@
         <span class="h1 title">dietary preferences</span>
       </div>
     </div>
-    <div class="content">
+    <div class="searchBar text-center">
+      <input type="text" placeholder="add guidelines" class="form-control searchInput"/>
+      <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
     </div>
+    <div class="dietsAll">
+      {{> restrictions}}
+    </div>
+  </div>
+</template>
+
+<template name="restriction">
+  <div class="recipeItem">
+    <div class="dietInner">
+      <span class="dietName">
+        {{name}}
+      </span>
+      <span class="dietImportance">
+        <select>
+          <option value="need">need</option>
+          <option value="want">want</option>
+        </select>
+      </span>
+    </div>
+  </div>
+</template>
+
+<template name="restrictions">
+  <div>
+    {{#each diets}}
+      {{> restriction}}
+    {{/each}}
   </div>
 </template>
