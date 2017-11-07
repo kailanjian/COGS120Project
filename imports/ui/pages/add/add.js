@@ -29,12 +29,12 @@ function initializePage() {
       console.log($(this));
       if ($(this)[0].outerText == difficultyInput) {
           console.log("matched");
-          $(this).css("background-color", "#DEDEDE");
+          $(this).css("background-color", "@primary");
       }
   })
   $(".meal .selector_buttons").each(function() {
     if ($(this)[0].outerText == mealInput) {
-        $(this).css("background-color", "#DEDEDE");
+        $(this).css("background-color", "@primary");
     }
   });
 }
@@ -85,11 +85,11 @@ Template.App_add.events({
 
         } else {
 
-            Meteor.call('recipes.insert', 
-                name, 
-                time, 
-                difficulty, 
-                meal, 
+            Meteor.call('recipes.insert',
+                name,
+                time,
+                difficulty,
+                meal,
                 servings,
                 ingredients,
                 instructions,
@@ -112,7 +112,7 @@ Template.difficulty.events({
       console.log(e);
       difficultyInput = e.currentTarget.outerText;
       $(".difficulty_and_servings .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "#DEDEDE");
+      $(e.currentTarget).css("background-color", "@primary");
     }
 });
 
@@ -121,7 +121,7 @@ Template.mealOfDay.events({
       console.log(e);
       mealInput = e.currentTarget.outerText;
       $(".meal .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "#DEDEDE");
+      $(e.currentTarget).css("background-color", "@primary");
     }
 });
 
