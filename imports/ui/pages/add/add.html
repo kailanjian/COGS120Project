@@ -37,7 +37,7 @@
       <div>
         <textarea class="big_text_field ingredients" placeholder="ingredients" id="ingredientsInput"></textarea>
         <textarea class="big_text_field instructions" placeholder="instructions" id="instructionsInput"></textarea>
-        <textarea class="big_text_field keywords" placeholder="keywords" id="keywordsInput"></textarea>
+        {{> tagInput }}
       </div>
     </div>
   </div>
@@ -73,4 +73,17 @@
   <span class = "selector_buttons">lunch</span>
   <span>/</span>
   <span class = "selector_buttons">dinner</span>
+</template>
+
+<template name="tagInput">
+  {{#if matchedTags}}
+  <div class="tag-selection">
+    {{#each matchedTags}}
+    <span class="tag-option">
+      {{this}}
+    </span>
+    {{/each}}
+  </div>
+  {{/if}}
+  <textarea class="big_text_field keywords" placeholder="keywords" id="keywordsInput"></textarea>
 </template>
