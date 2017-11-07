@@ -48,6 +48,12 @@ Template.App_home.helpers({
   },
 });
 
+Template.App_home.helpers({
+  UserName(){
+    return Meteor.user().profile.name
+  }
+})
+
 
 Template.App_home.events({
   'click .sideBarOverlay'(event) {
