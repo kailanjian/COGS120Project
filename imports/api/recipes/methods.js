@@ -8,7 +8,7 @@ Meteor.methods({
   'recipes.insert'(
       name, time, difficulty, 
       meal, servings, ingredients, 
-      instructions, keywords, owner) {
+      instructions, keywords, foodImg, recipeImg, owner) {
 
     return Recipes.insert({
       name: name,
@@ -19,13 +19,15 @@ Meteor.methods({
       ingredients: ingredients,
       instructions: instructions,
       keywords: keywords,
+      foodImg: foodImg,
+      recipeImg: recipeImg,
       owner: owner,
     });
   },
   'recipes.update'(id, name, time, difficulty,
       meal, servings, ingredients,
-      instructions, keywords, owner) {
-      
+      instructions, keywords, foodImg, recipeImg, owner) {
+      console.log("updating recipe on server");
       return Recipes.update(id, { $set: {
         name: name,
         time: time,
@@ -35,6 +37,8 @@ Meteor.methods({
         ingredients: ingredients,
         instructions: instructions,
         keywords: keywords,
+        foodImg: foodImg,
+        recipeImg: recipeImg,
         owner: owner }
       } )
   },
