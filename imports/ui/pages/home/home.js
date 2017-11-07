@@ -75,7 +75,6 @@ Template.App_home.events({
   'input .searchBar'(event) {
     let text = $(".searchInput").val();
     searchText.set(text);
-    console.log(text);
   }
 });
 
@@ -84,7 +83,6 @@ Template.recipeGroup.onCreated(function () {
 
 Template.recipeGroup.helpers({
   recipes() {
-    console.log(this);
     var classifier = this.classifier;
     // important to activate Tracker
     var search = searchText.get();
