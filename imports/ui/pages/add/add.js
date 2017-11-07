@@ -64,6 +64,10 @@ Template.App_add.helpers({
 })
 
 Template.App_add.events({
+    "click .recipe_photo_button"(event) {
+        event.preventDefault();
+        $("#recipe-photo-input").click();
+    },
     "click #saveButton"(event) {
         // collect all data
         // todo: images
@@ -77,24 +81,41 @@ Template.App_add.events({
         let instructions = $("#instructionsInput").val();
         let keywords = $("#keywordsInput").val();
 
-        let fileInput = $("#file-input").prop("files");
-        let file = fileInput[0];
-        if (file) {
-            Images.insert(file, finishedFile); 
+        let recipePhotoInput = $("#recipe-photo-input").prop("files");
+        let recipeFile = recipePhotoInput[0];
+        if (recipeFile) {
+            Images.insert(recipeFile, finishedPhotoInput); 
         } else {
-            finishedFile(undefined, undefined);
+            finishedPhotoInput(undefined, undefined);
         }
 
+        let recipeFileId;
+        let fileInput = $("#file-input").prop("files");
+        let file = fileInput[0];
+        function finishedPhotoInput(err, res) {
+            if (!err && res) {
+                console.log("set recipe file id");
+                recipeFileId = res._id;
+            }
+
+            if (file) {
+                Images.insert(file, finishedFile);
+            } else {
+                finishedFile(undefined, undefined);
+            }
+        }
+
+        let fileId;
         function finishedFile(err, res) {
+            if (res) {
+                console.log("set recipe file id");
+                fileId = res._id;
+            }
+
             if (err) {
                 console.log("ERROR");
                 console.log(err)
             } else {
-                console.log(res)
-                if (!file) {
-                    console.log("no file");
-                    //error, can do file validation here
-                }
                 if (id.get()) {
                     console.log("updating recipe");
                     console.log("id: " + id.get());
@@ -109,8 +130,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        res._id,
-                        "TODO",
+                        fileId,
+                        recipeFileId,
                         Meteor.userId());
                 } else {
                     console.log("inserting recipe");
@@ -123,8 +144,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        res._id,
-                        "TODO",
+                        fileId,
+                        recipeFileId,
                         Meteor.userId())
                 }
             }
