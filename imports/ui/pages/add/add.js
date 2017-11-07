@@ -7,6 +7,8 @@ import { Images } from '/imports/api/images/images.js';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
+let foodImg = undefined;
+let recipeImg = undefined;
 
 var id = new ReactiveVar("");
 
@@ -27,6 +29,8 @@ function initializePage() {
   $(".keywords").val(recipe.keywords);
   difficultyInput = recipe.difficulty;
   mealInput = recipe.meal;
+  foodImg = recipe.foodImg;
+  recipeImg = recipe.recipeImg;
   $(".difficulty_and_servings .selector_buttons").each(function() {
       console.log(this);
       console.log($(this));
@@ -83,33 +87,34 @@ Template.App_add.events({
 
         let recipePhotoInput = $("#recipe-photo-input").prop("files");
         let recipeFile = recipePhotoInput[0];
+        let fileInput = $("#file-input").prop("files");
+        let file = fileInput[0];
         if (recipeFile) {
+            console.log("inserting recipeFile");
             Images.insert(recipeFile, finishedPhotoInput); 
         } else {
             finishedPhotoInput(undefined, undefined);
         }
 
-        let recipeFileId;
-        let fileInput = $("#file-input").prop("files");
-        let file = fileInput[0];
         function finishedPhotoInput(err, res) {
             if (!err && res) {
                 console.log("set recipe file id");
-                recipeFileId = res._id;
+                recipeImg = res._id;
             }
 
             if (file) {
+                console.log("inserting file");
                 Images.insert(file, finishedFile);
             } else {
+                console.log("file not found: " + file);
                 finishedFile(undefined, undefined);
             }
         }
 
-        let fileId;
         function finishedFile(err, res) {
             if (res) {
                 console.log("set recipe file id");
-                fileId = res._id;
+                foodImg = res._id;
             }
 
             if (err) {
@@ -130,8 +135,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        fileId,
-                        recipeFileId,
+                        foodImg,
+                        recipeImg,
                         Meteor.userId());
                 } else {
                     console.log("inserting recipe");
@@ -144,8 +149,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        fileId,
-                        recipeFileId,
+                        foodImg,
+                        recipeImg,
                         Meteor.userId())
                 }
             }
