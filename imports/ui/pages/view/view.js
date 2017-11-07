@@ -9,7 +9,7 @@ var id = new ReactiveVar("");
 Template.App_view.onCreated(function() {
   Meteor.subscribe("recipes.user");
   Meteor.subscribe("images.all");
-  
+
   id.set(FlowRouter.current().params.id);
   console.log("set id to " + id.get);
 });
@@ -25,7 +25,7 @@ Template.difficulty.events({
       console.log(e);
       difficultyInput = e.currentTarget.outerText;
       $(".difficulty_and_servings .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "@primary");
+      $(e.currentTarget).css("background-color", "#DEDEDE");
     }
 });
 
@@ -34,6 +34,6 @@ Template.mealOfDay.events({
       console.log(e);
       mealInput = e.currentTarget.outerText;
       $(".meal .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "@primary");
+      $(e.currentTarget).css("background-color", "#DEDEDE");
     }
 });

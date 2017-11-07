@@ -32,12 +32,12 @@ function initializePage() {
       console.log($(this));
       if ($(this)[0].outerText == difficultyInput) {
           console.log("matched");
-          $(this).css("background-color", "@primary");
+          $(this).css("background-color", "#DEDEDE");
       }
   })
   $(".meal .selector_buttons").each(function() {
     if ($(this)[0].outerText == mealInput) {
-        $(this).css("background-color", "@primary");
+        $(this).css("background-color", "#DEDEDE");
     }
   });
 }
@@ -84,7 +84,7 @@ Template.App_add.events({
         let recipePhotoInput = $("#recipe-photo-input").prop("files");
         let recipeFile = recipePhotoInput[0];
         if (recipeFile) {
-            Images.insert(recipeFile, finishedPhotoInput); 
+            Images.insert(recipeFile, finishedPhotoInput);
         } else {
             finishedPhotoInput(undefined, undefined);
         }
@@ -104,7 +104,7 @@ Template.App_add.events({
                 finishedFile(undefined, undefined);
             }
         }
-      
+
         let fileId;
         function finishedFile(err, res) {
             if (res) {
@@ -135,11 +135,11 @@ Template.App_add.events({
                         Meteor.userId());
                 } else {
                     console.log("inserting recipe");
-                    Meteor.call('recipes.insert', 
-                        name, 
-                        time, 
-                        difficulty, 
-                        meal, 
+                    Meteor.call('recipes.insert',
+                        name,
+                        time,
+                        difficulty,
+                        meal,
                         servings,
                         ingredients,
                         instructions,
@@ -166,7 +166,7 @@ Template.difficulty.events({
       console.log(e);
       difficultyInput = e.currentTarget.outerText;
       $(".difficulty_and_servings .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "@primary");
+      $(e.currentTarget).css("background-color", "#DEDEDE");
     }
 });
 
@@ -175,7 +175,7 @@ Template.mealOfDay.events({
       console.log(e);
       mealInput = e.currentTarget.outerText;
       $(".meal .selector_buttons").css("background-color", "inherit");
-      $(e.currentTarget).css("background-color", "@primary");
+      $(e.currentTarget).css("background-color", "#DEDEDE");
     }
 });
 
