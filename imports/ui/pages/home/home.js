@@ -16,10 +16,10 @@ Template.App_home.onCreated(function() {
   subscription = Meteor.subscribe('recipes.user');
   searchText  = new ReactiveVar("");
 
-  recipeGroups = 
+  recipeGroups =
     [
       {
-        name: "Recommended Based on Diet Restrictions", 
+        name: "Recommended Based on Diet Restrictions",
         classifier: function(recipe) {
           if (recipe.difficulty == "easy") {
             return true;
@@ -73,7 +73,7 @@ Template.App_home.events({
   }
 });
 
-Template.recipeGroup.onCreated(function () { 
+Template.recipeGroup.onCreated(function () {
 });
 
 Template.recipeGroup.helpers({
@@ -88,14 +88,14 @@ Template.recipeGroup.helpers({
       }
       return false;
     }
-    
+
     let cursor = Recipes.find({$where: function() {
       return filteredClassifier(this)
     }});
     if (cursor.count() > 0) {
       return cursor;
     }
-    else 
+    else
       return 0;
   }
 })
