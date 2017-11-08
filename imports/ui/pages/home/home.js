@@ -59,7 +59,7 @@ Template.App_home.events({
   'click .sideBarOverlay'(event) {
     $('.sideBarOverlay').hide();
   },
-  'click .navButtonWrapper'(event) {
+  'click .menuButtonWrapper'(event) {
     $('.sideBarOverlay').show();
   },
   'click .removeRecipeButton'(event) {
