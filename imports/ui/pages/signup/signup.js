@@ -10,6 +10,7 @@ Template.App_signup.events({
 
     if (password != passConfirm) {
       alert("Your passwords did not match!");
+      return;
     }
     // TODO validate email here
     Accounts.createUser({
