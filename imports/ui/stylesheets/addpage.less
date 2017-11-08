@@ -7,7 +7,7 @@ span {
 }
 
 .picture_holder{
-  background-color: @primary;
+  background-color: @secondary;
 }
 
 .centered{
@@ -25,7 +25,7 @@ span {
 .add_food_photo_button{
     font-size:35px !important;
     position: relative;
-    background-color: @secondary;
+    background-color: @primary;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 7px;
@@ -34,10 +34,10 @@ span {
 }
 
 .recipe_photo_button{
-    background-color: @primary;
+    background-color: @secondary;
     width: 90%;
     font-size: 20px;
-    border-radius: 9px;
+    border-radius: @border-radius;
     padding: 0px;
 }
 
@@ -54,7 +54,7 @@ span {
   display: inline-block;
   padding: 1px;
   cursor: pointer;
-  border-radius: 9px;
+  border-radius: @border-radius;
   margin-bottom: 5px;
 }
 
@@ -76,12 +76,9 @@ span {
 }
 
 .small_input{
-    border: none !important;
-    border-radius: 9px;
     margin-top: 3px;
     font-size: 16px !important;
     width: 75px;
-    background-color: @primary !important;
     text-align: center;
 }
 
@@ -92,12 +89,8 @@ span {
 .big_text_field{
   padding: 10px;
   margin-top: 10px;
-  border: none !important;
-  border-radius: 9px;
   font-size: 13px;
   width: 100%;
-  word-wrap: break-word;
-  background-color: @primary
 }
 
 .ingredients{
