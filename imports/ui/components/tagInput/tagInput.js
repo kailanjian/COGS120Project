@@ -46,7 +46,7 @@ Template.tagInput.events({
         splitInput[splitInput.length - 1] = replaceWord;
         newInputText = splitInput.join(", ");
 
-        tagInputText.set(newInputText);
+        tagInputText.set(newInputText + ", ");
         tagInputWord.set("");
         $(".keywords").val(tagInputText.get());
         $(".keywords").focus();
