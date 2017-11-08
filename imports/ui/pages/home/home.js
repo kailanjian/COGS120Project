@@ -136,18 +136,21 @@ function isRecommendedRecipe(checkRecipe) {
 }
 
 Template.App_home.onCreated(function() {
+  console.log("CHANGED");
+  recipeGroups = new ReactiveVar([]);
   subscription = Meteor.subscribe('recipes.user');
   Meteor.subscribe('diets.user', function() {
     console.log("DIETS SUBSCRIPTION READY");
-    recipeGroups.get().unshift({
-        name: "Recommended Based on Diet Restrictions",
-        classifier: function(recipe) {
-          if (isRecommendedRecipe(recipe)) {
-            return true;
-          }
+    let temp = recipeGroups.get();
+    temp.unshift({
+      name: "Recommended Based on Diet Restrictions",
+      classifier: function(recipe) {
+        if (isRecommendedRecipe(recipe)) {
+          return true;
         }
-      });
-    recipeGroups.set(recipeGroups.get());
+      }
+    });
+    recipeGroups.set(temp);
   });
   searchText  = new ReactiveVar("");
 
@@ -156,15 +159,15 @@ Template.App_home.onCreated(function() {
   var zCode = "z".charCodeAt(0);
   for (let i = aCode; i <= zCode; i++) {
     let char = String.fromCharCode(i);
-    recipeGroups.get().push(
+    let temp = recipeGroups.get();
+    temp.push(
       {
         name: char.toUpperCase(),
         classifier: function(recipe) {
           return (recipe.name.charAt(0).toUpperCase() == char.toUpperCase()) && recipe._id != "internetbreakfast";
         }
-      }
-    )
-    recipeGroups.set(recipeGroups.get());
+      });
+    recipeGroups.set(temp);
   }
 });
 
