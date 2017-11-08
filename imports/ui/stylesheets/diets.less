@@ -1,17 +1,33 @@
 .dietInner{
   display:flex;
-    flex-direction: row;
-    margin-left: 1rem;
+  flex-direction: row;
+  width: 100%;
+}
+
+.dietImportanceSelect{
+  margin-left: auto;
+}
+
+.preferenceLabels{
+  margin-top: 0.2rem;
+  display:flex;
+  width: 100%;
+  margin-bottom: -0.8rem;
 }
 
 .dietsAll{
-  background-color: white;
   margin-top: 10px;
 }
 
 .dietItem{
   color: black;
-  border-top: 1px solid #dbdbdb;
+  background-color: inherit;
+  border-top: 1px solid @highlight;
+}
+
+.dietDisclaimer{
+  color: @highlight;
+  margin-top: 5rem;
 }
 
 .dietImportance{
