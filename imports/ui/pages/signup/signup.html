@@ -10,17 +10,17 @@
     </div>
 
     <div class = "centered col-xs-12">
-      <input title = "Please enter a valid email(e.g example@mail.com)" class = "typing" type="text" placeholder="Email Address" id="emailInput" required pattern= "[@]+ [.]+"/>
+      <input title = "Please enter a valid email(e.g example@mail.com)" class = "typing" type="text" placeholder="Email Address" id="emailInput" required pattern= "^\S+@\S+$"/>
     </div>
-    
+
     <div class = "centered col-xs-12">
-        <input title="1-15 characters, A-Z, a-z or 0-9" class = "typing" type="password" placeholder="Password" id="passwordInput" required pattern = "[a-zA-Z0-9{1,15}"/>  
+        <input title="1-15 characters, A-Z, a-z or 0-9" class = "typing" type="password" placeholder="Password" id="passwordInput" required pattern = "[a-zA-Z0-9]{1,15}"/>
     </div>
-    
+
     <div class = "centered col-xs-12">
         <input title = "Password characters must be A-Z,a-z or 0-9" class= "typing" type="password" placeholder="Confirm Password" id="passwordConfirmInput" required pattern = "[a-zA-Z0-9]{1,15}" />
     </div>
-    
+
     <div class = "centered">
       <input type="submit" value="Signup" id ="submitButton" class = "btn btn-success" />
     </div>
@@ -28,5 +28,5 @@
   <div class = "centered col-xs-12">
       <button id = "cancelButton" class = "btn btn-danger">Cancel</button>
   </div>
-    
+
 </template>
