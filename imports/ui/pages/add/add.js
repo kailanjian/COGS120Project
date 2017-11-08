@@ -80,6 +80,12 @@ Template.App_add.events({
         $("#recipe-photo-input").click();
     },
     "click #saveButton"(event) {
+        event.preventDefault();
+        if(difficultyInput == null || mealInput== null)
+        {
+            alert("Please select the difficulty/time of the meal!");
+            return;
+        }
         // collect all data
         // todo: images
         let name = $(".recipe_name").val();
@@ -102,6 +108,7 @@ Template.App_add.events({
         } else {
             finishedPhotoInput(undefined, undefined);
         }
+        
 
         function finishedPhotoInput(err, res) {
             if (!err && res) {
@@ -162,6 +169,7 @@ Template.App_add.events({
                 }
             }
         }
+        FlowRouter.go("/")
     }
 });
 
