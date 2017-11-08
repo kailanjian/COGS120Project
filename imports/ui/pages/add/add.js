@@ -14,6 +14,7 @@ let foodImg = undefined;
 let recipeImg = undefined;
 
 var id = new ReactiveVar("");
+var filledOut = false;
 
 
 
@@ -138,12 +139,18 @@ Template.App_add.events({
             return;
         }
 
+        filledOut = true;
+
         function shakethebox(target){
 
             console.log(target);
         }
 
         function finishedPhotoInput(err, res) {
+            console.log(filledOut);
+            if (!filledOut){
+              return;
+            }
             if (!err && res) {
                 console.log("set recipe file id");
                 recipeImg = res._id;
@@ -159,6 +166,10 @@ Template.App_add.events({
         }
 
         function finishedFile(err, res) {
+            if (!filledOut){
+              return;
+            }
+            console.log(filledOut);
             if (res) {
                 console.log("set recipe file id");
                 foodImg = res._id;
@@ -202,7 +213,11 @@ Template.App_add.events({
                 }
             }
         }
-        FlowRouter.go("/")
+
+
+        if (filledOut){
+          FlowRouter.go("/")
+        }
     }
 });
 
