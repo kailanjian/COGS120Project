@@ -1,4 +1,5 @@
 import { Recipes } from '/imports/api/recipes/recipes.js';
+import { Diets } from '/imports/api/diets/diets.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -12,16 +13,55 @@ var recipeGroups;
 var searchText;
 var subscription;
 
+function isRecommendedRecipe(checkRecipe) {
+  var recipes = Recipes.find({}).map(function (recipe) {
+    return recipe;
+  });
+  console.log(recipes);
+  var diets = Diets.find({}).map(function(diets) {
+    return diet;
+  });
+  console.log(Diets);
+  console.log(diets);
+  let requirements = diets.filter(function(diet) {
+    return diets.importance == "need";
+  }).map(function(diet) {
+    return diets.name;
+  });
+
+  var breakfastRecipe = recipes.filter(function(recipe) {
+    if (recipe.meal == "breakfast") {
+      let meetsRequirements = true;
+      requirements.forEach(function(requirement) {
+        if (!recipe.keywords.split(",").map((keyword) => keyword.trim())
+            .find((keyword) => requirement == keyword) ){
+              meetsRequirements = false;
+        }
+      }, this);
+      if (meetsRequirements)
+        return recipe;
+    }
+  })
+  if (breakfastRecipe.count > 0) {
+    breakfastRecipe = breakfastRecipe[0];
+  } else {
+    breakfastRecipe = {name: "INTERNET BREAKFAST"};
+  }
+  return checkRecipe._id == breakfastRecipe._id;
+}
+
 Template.App_home.onCreated(function() {
   subscription = Meteor.subscribe('recipes.user');
+  Meteor.subscribe('diets.all');
   searchText  = new ReactiveVar("");
 
+  console.log(isRecommendedRecipe);
   recipeGroups =
     [
       {
         name: "Recommended Based on Diet Restrictions",
         classifier: function(recipe) {
-          if (recipe.difficulty == "easy") {
+          if (isRecommendedRecipe(recipe)) {
             return true;
           }
         }
