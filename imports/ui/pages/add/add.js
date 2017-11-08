@@ -1,4 +1,5 @@
 import './add.html';
+import '/imports/ui/components/tagInput/tagInput.js';
 
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
@@ -191,7 +192,7 @@ $("#first").click(function () {
 });
 
 
-
+/*
 let tagInputText = new ReactiveVar("");
 let tagInputWord = new ReactiveVar("");
 
@@ -242,4 +243,4 @@ Template.tagInput.events({
         $(".keywords").focus();
 
     }
-});
+});*/

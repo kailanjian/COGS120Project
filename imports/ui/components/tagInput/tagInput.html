@@ -1,0 +1,12 @@
+<template name="tagInput">
+  {{#if matchedTags}}
+  <div class="tag-selection">
+    {{#each matchedTags}}
+    <span class="tag-option">
+      {{this}}
+    </span>
+    {{/each}}
+  </div>
+  {{/if}}
+  <input type="text" class="big_text_field keywords" placeholder="keywords" id="keywordsInput" />
+</template>
