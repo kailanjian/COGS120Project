@@ -13,10 +13,10 @@
       </div>
     </div>
 
+    </div>
     {{#each recipeGroups}}
       {{> recipeGroup}}
     {{/each}}
-  </div>
   <div class="sideBarOverlay">
     <div class="sideBar">
       <div class="container">
@@ -44,6 +44,10 @@
       </div>
     </div>
   </div>
+
+  <div class="go_home" id="done_delete">
+    <span class="btn btn-default">done</span>
+  </div>
 </template>
 
 <!-- Display a Recipe -->
@@ -70,7 +74,7 @@
 
 <template name="recipeGroup">
   {{#if recipes}}
-    <div class="groupBar">
+    <div class="groupBar container">
       <span>{{name}}</span>
     </div>
     <div class="groupContent">
