@@ -79,6 +79,9 @@ Template.App_add.events({
         event.preventDefault();
         $("#recipe-photo-input").click();
     },
+    "change #recipe-photo-input"(event) {
+        $(".recipe_photo_button").text("added recipe photo");
+    },
     "click #saveButton"(event) {
         event.preventDefault();
         // collect all data
@@ -99,10 +102,10 @@ Template.App_add.events({
         let file = fileInput[0];
         if (recipeFile) {
             console.log("inserting recipeFile");
-            Images.insert(recipeFile, finishedPhotoInput); 
+            Images.insert(recipeFile, finishedPhotoInput);
         } else {
             finishedPhotoInput(undefined, undefined);
-        } 
+        }
         if(!name)
         {
             alert("Please add in a name for your recipe!")
@@ -134,9 +137,9 @@ Template.App_add.events({
             alert("Please input ingredients!");
             return;
         }
-        
+
         function shakethebox(target){
-            
+
             console.log(target);
         }
 
@@ -201,6 +204,12 @@ Template.App_add.events({
         }
         FlowRouter.go("/")
     }
+});
+
+Template.galleryButton.events({
+  'change #file-input': function(e){
+    $('#foodPhotoDescription').text("added food photo");
+  }
 });
 
 Template.camButton.events({

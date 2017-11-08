@@ -4,7 +4,7 @@
       {{>galleryButton}}
     </div>
     <div class="centered add_text">
-      <span>add food photo</span>
+      <span id="foodPhotoDescription">add food photo</span>
     </div>
   </div>
   <div>
@@ -30,7 +30,7 @@
       </div>
       <div class="centered">
         <form class="centered">
-          <input id="recipe-photo-input" type="file" name="name" style="display: none;" accept="image/." capture = "camera"/>
+          <input id="recipe-photo-input" type="file" name="name" style="display: none;" accept="image/."/>
           <button class="btn recipe_photo_button">add recipe photo</button>
         </form>
       </div>
@@ -55,23 +55,23 @@
 
 
 <template name = "galleryButton">
-  <input id="file-input" type="file" name="name" style="display: none;" accept="image/." capture = "camera"/>
+  <input id="file-input" type="file" name="name" style="display: none;" accept="image/."/>
   <button class = "add_food_photo_button galleryButton btn btn-default" onclick = "document.getElementById('file-input').click();"><i class="fa fa-picture-o"></i></button>
 </template>
 
 <template name = "difficulty">
   <span class = "selector_buttons">easy</span>
-  <span>/</span>
+  <span>|</span>
   <span class = "selector_buttons">med</span>
-  <span>/</span>
+  <span>|</span>
   <span class = "selector_buttons">hard</span>
 </template>
 
 <template name = "mealOfDay">
   <span class = "selector_buttons">breakfast</span>
-  <span>/</span>
+  <span>|</span>
   <span class = "selector_buttons">lunch</span>
-  <span>/</span>
+  <span>|</span>
   <span class = "selector_buttons">dinner</span>
 </template>
 
