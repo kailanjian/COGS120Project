@@ -5,8 +5,12 @@ import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipes/recipes.js';
 import { Images } from '/imports/api/images/images.js';
 
+import { DietOptions } from '/imports/api/dietoptions/dietoptions.js';
+
 let difficultyInput = undefined;
 let mealInput = undefined;
+let foodImg = undefined;
+let recipeImg = undefined;
 
 var id = new ReactiveVar("");
 
@@ -27,6 +31,8 @@ function initializePage() {
   $(".keywords").val(recipe.keywords);
   difficultyInput = recipe.difficulty;
   mealInput = recipe.meal;
+  foodImg = recipe.foodImg;
+  recipeImg = recipe.recipeImg;
   $(".difficulty_and_servings .selector_buttons").each(function() {
       console.log(this);
       console.log($(this));
@@ -83,33 +89,34 @@ Template.App_add.events({
 
         let recipePhotoInput = $("#recipe-photo-input").prop("files");
         let recipeFile = recipePhotoInput[0];
+        let fileInput = $("#file-input").prop("files");
+        let file = fileInput[0];
         if (recipeFile) {
-            Images.insert(recipeFile, finishedPhotoInput);
+            console.log("inserting recipeFile");
+            Images.insert(recipeFile, finishedPhotoInput); 
         } else {
             finishedPhotoInput(undefined, undefined);
         }
 
-        let recipeFileId;
-        let fileInput = $("#file-input").prop("files");
-        let file = fileInput[0];
         function finishedPhotoInput(err, res) {
             if (!err && res) {
                 console.log("set recipe file id");
-                recipeFileId = res._id;
+                recipeImg = res._id;
             }
 
             if (file) {
+                console.log("inserting file");
                 Images.insert(file, finishedFile);
             } else {
+                console.log("file not found: " + file);
                 finishedFile(undefined, undefined);
             }
         }
 
-        let fileId;
         function finishedFile(err, res) {
             if (res) {
                 console.log("set recipe file id");
-                fileId = res._id;
+                foodImg = res._id;
             }
 
             if (err) {
@@ -130,8 +137,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        fileId,
-                        recipeFileId,
+                        foodImg,
+                        recipeImg,
                         Meteor.userId());
                 } else {
                     console.log("inserting recipe");
@@ -144,8 +151,8 @@ Template.App_add.events({
                         ingredients,
                         instructions,
                         keywords,
-                        fileId,
-                        recipeFileId,
+                        foodImg,
+                        recipeImg,
                         Meteor.userId())
                 }
             }
@@ -181,4 +188,58 @@ Template.mealOfDay.events({
 
 $("#first").click(function () {
     $("#uploadfile").click();
+});
+
+
+
+let tagInputText = new ReactiveVar("");
+let tagInputWord = new ReactiveVar("");
+
+Template.tagInput.onCreated(function() {
+    console.log("tag input created");
+
+});
+
+Template.tagInput.helpers({
+    matchedTags() {
+        if (tagInputWord.get()) {
+            return DietOptions.filter(function(word) {
+                return word.match(tagInputWord.get());
+            }).slice(0, 5);
+        }
+        return false;
+    }
+})
+
+Template.tagInput.events({
+    "input .keywords"(event) {
+        console.log("hello");
+        let textInput = $(event.currentTarget).val();
+        console.log("input changed to: " + textInput);
+        tagInputText.set(textInput);
+
+        if (!(textInput.match(","))) {
+            tagInputWord.set(tagInputText.get());
+        } else {
+            tagInputWord.set(tagInputText.get().split(",").slice(-1)[0].trim());
+            console.log("tagInputWord set to: " + tagInputWord.get());
+        }
+
+        console.log("tag input word set to: " + tagInputWord.get())
+    },
+    "click .tag-option"(event) {
+        let replaceWord = event.currentTarget.outerText.trim();
+        console.log(event);
+        console.log("replaced word: " + replaceWord);
+        let newInputText = tagInputText.get();
+        let splitInput = newInputText.split(",").map(function(word) {return word.trim()});
+        splitInput[splitInput.length - 1] = replaceWord;
+        newInputText = splitInput.join(", ");
+
+        tagInputText.set(newInputText);
+        tagInputWord.set("");
+        $(".keywords").val(tagInputText.get());
+        $(".keywords").focus();
+
+    }
 });
