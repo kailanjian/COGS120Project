@@ -12,11 +12,18 @@
         <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
       </div>
     </div>
-
-    </div>
-    {{#each recipeGroups}}
-      {{> recipeGroup}}
-    {{/each}}
+    {{#if noRecipes}}
+      <div class="no_recipes">
+        <h5 class="centered">Oh no! You don't have any recipes.</h5>
+        <span class="centered no_recipes_instructions">Click On</span>
+        <span class="centered no_recipes_instructions">'navigate' -> 'input recipes' </span>
+        <span class="centered no_recipes_instructions">to add recipes. </span>
+      </div>
+    {{/if}}
+  </div>
+  {{#each recipeGroups}}
+    {{> recipeGroup}}
+  {{/each}}
   <div class="sideBarOverlay">
     <div class="sideBar">
       <div class="container">

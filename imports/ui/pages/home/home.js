@@ -42,9 +42,16 @@ Template.App_home.onCreated(function() {
   }
 });
 
+Template.App_home.onRendered( function() {
+  $('#done_delete').hide();
+});
+
 Template.App_home.helpers({
   recipeGroups() {
     return recipeGroups;
+  },
+  noRecipes() {
+    return Recipes.find({}).count() == 0;
   },
 });
 
@@ -121,5 +128,4 @@ Template.recipe.events({
 Template.recipe.onRendered(function() {
   // initialize states
   $('.deleteButton').hide();
-  $('#done_delete').hide();
 })
