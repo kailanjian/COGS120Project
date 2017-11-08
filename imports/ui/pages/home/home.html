@@ -53,7 +53,7 @@
 <!-- Display a Recipe -->
 <template name="recipe">
   <a href="/view/{{_id}}" class="recipeItem">
-    <div class="recipeOuter">
+    <div class="recipeOuter container">
       <div class="deleteButton">
         <span class="fa fa-trash deleteIcon"></span>
       </div>
@@ -65,7 +65,7 @@
           {{name}}
         </div>
         <div class="recipeDetails">
-          {{time}} | {{difficulty}} | {{meal}}
+          {{time}} min | {{difficulty}} | {{meal}}
         </div>
       </div>
     </div>
