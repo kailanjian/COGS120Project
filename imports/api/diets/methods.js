@@ -9,9 +9,7 @@ Meteor.methods({
     });
   },
 
-  'diets.insert'(
-    name, importance, owner) {
-
+  'diets.insert'(name, importance, owner) {
       return Diets.insert({
         name: name,
         importance: importance,
