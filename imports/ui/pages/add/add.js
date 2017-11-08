@@ -15,6 +15,8 @@ let recipeImg = undefined;
 
 var id = new ReactiveVar("");
 
+
+
 function initializePage() {
   // initialize page data
   id.set(FlowRouter.current().params.id);
@@ -69,6 +71,8 @@ Template.App_add.helpers({
         return id.get();
     }
 })
+
+
 
 Template.App_add.events({
     "click .recipe_photo_button"(event) {

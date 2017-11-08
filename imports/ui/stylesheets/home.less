@@ -19,16 +19,15 @@ body {
   justify-content: left;
 }
 
-.navButtonWrapper {
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  flex-direction: center;
-  align-items: center;
+.menuButtonWrapper {
+  color: @highlight;
+  background-color: @primary;
+  border-radius: 9px;
+  cursor: pointer;
 }
 
 .titleBar .title{
-  margin-right: auto;
+  margin-left: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,12 +39,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-}
-
-.filterButton {
-  color: @secondary;
-  background-color: #8c8c8c;
 
 }
 
@@ -89,6 +82,13 @@ body {
   margin-left: 1rem;
 }
 
+.menu_button{
+  margin: .3rem;
+  margin-bottom: 1px;
+  margin-top: 0px;
+  color: @highlight;
+}
+
 .groupContent {
   background-color: @secondary;
 }
@@ -105,7 +105,7 @@ body {
 
 .sideBar {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   width: 70%;
   height: 100%;
@@ -145,7 +145,7 @@ body {
   margin-left: -15px;
   margin-right: -30px;
   padding-right: -15px;
-  width: 120%;
+  width: 111%;
 }
 
 .iconCircle {

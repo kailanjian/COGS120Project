@@ -11,7 +11,6 @@ Template.App_signup.events({
     if (password != passConfirm) {
       alert("Your passwords did not match!");
     }
-
     // TODO validate email here
     Accounts.createUser({
       email: email,
@@ -20,7 +19,7 @@ Template.App_signup.events({
     }, function(error) {
       if (error) {
         // TODO better error message
-        alert("Error with one of the fields!")
+        alert("Error with one of the fields!");
         console.log(error);
       } else {
         console.log("Signup was a success!")

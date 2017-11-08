@@ -10,7 +10,7 @@ Template.App_login.events({
 
     Meteor.loginWithPassword({email: email}, password, function(error) {
       if (error) {
-        alert("login failed");
+        alert("You're username/password is incorrect!");
         console.log(error);
       } else {
         FlowRouter.go("/")

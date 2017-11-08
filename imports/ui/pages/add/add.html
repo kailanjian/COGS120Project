@@ -9,14 +9,14 @@
   </div>
   <div>
     <div class="container">
-      <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name">
+      <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name" required>
       <div class="difficulty_and_servings">
         <div class="inline">
           {{>difficulty}}
         </div>
         <div class="inline text_and_input">
           <span>servings:</span>
-          <input type="text" id="servingsInput" class="small_input">
+          <input type="number" id="servingsInput" class="small_input">
         </div>
       </div>
       <div class="meal">
@@ -25,7 +25,7 @@
         </div>
         <div class="text_and_input time">
           <span>time:</span>
-          <input type="text" id="timeInput" class="small_input">
+          <input type="number" id="timeInput" class="small_input">
         </div>
       </div>
       <div class="centered">
