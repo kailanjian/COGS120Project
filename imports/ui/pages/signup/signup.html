@@ -6,19 +6,19 @@
   </div>
   <form id="signupForm">
     <div class = "centered col-xs-12">
-      <input type="text" id="nameInput" placeholder="Name" class="typing" />
+      <input title="Only accepts A-Z,a-z" type="text" id="nameInput" placeholder="Name" class="typing" required pattern = "[a-zA-Z]{1,50}" />
     </div>
 
     <div class = "centered col-xs-12">
-      <input class = "typing" type="text" placeholder="Email Address" id="emailInput" />
+      <input class = "typing" type="text" placeholder="Email Address" id="emailInput" required pattern = "[@]*+"/>
     </div>
     
     <div class = "centered col-xs-12">
-        <input class = "typing" type="password" placeholder="Password" id="passwordInput" />  
+        <input title="1-15 characters, A-Z,a-z,0-9" class = "typing" type="password" placeholder="Password" id="passwordInput" required pattern = "[a-zA-Z0-9{1,15}"/>  
     </div>
     
     <div class = "centered col-xs-12">
-        <input class= "typing" type="password" placeholder="Confirm Password" id="passwordConfirmInput" />
+        <input class= "typing" type="password" placeholder="Confirm Password" id="passwordConfirmInput" required pattern = "[a-zA-Z0-9{1,15}" />
     </div>
     
     <div class = "centered">
