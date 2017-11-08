@@ -80,6 +80,7 @@ Template.App_add.events({
         $("#recipe-photo-input").click();
     },
     "click #saveButton"(event) {
+        event.preventDefault();
         // collect all data
         // todo: images
         let name = $(".recipe_name").val();
@@ -101,6 +102,42 @@ Template.App_add.events({
             Images.insert(recipeFile, finishedPhotoInput); 
         } else {
             finishedPhotoInput(undefined, undefined);
+        } 
+        if(!name)
+        {
+            alert("Please add in a name for your recipe!")
+            return;
+        }
+        if(difficultyInput == null || mealInput== null)
+        {
+            alert("Please select the difficulty/time of the meal!");
+            return;
+        }
+       if(!time)
+       {
+           alert("Please add in how much time it takes to make!")
+           return;
+       }
+       if(!servings)
+       {
+           alert("Please indicate the number of servings this recipe has!")
+           return;
+       }
+
+        if(!recipeFile && !instructions)
+        {
+            alert("Please input instructions!");
+            return;
+        }
+        if(!recipeFile && !ingredients)
+        {
+            alert("Please input ingredients!");
+            return;
+        }
+        
+        function shakethebox(target){
+            
+            console.log(target);
         }
 
         function finishedPhotoInput(err, res) {
@@ -162,6 +199,7 @@ Template.App_add.events({
                 }
             }
         }
+        FlowRouter.go("/")
     }
 });
 

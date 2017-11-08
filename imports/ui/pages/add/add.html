@@ -31,19 +31,19 @@
       <div class="centered">
         <form class="centered">
           <input id="recipe-photo-input" type="file" name="name" style="display: none;" accept="image/." capture = "camera"/>
-          <button class="btn recipe_photo_button">take recipe photo</button>
+          <button class="btn recipe_photo_button">add recipe photo</button>
         </form>
       </div>
       <div>
-        <textarea class="big_text_field ingredients" placeholder="ingredients" id="ingredientsInput"></textarea>
-        <textarea class="big_text_field instructions" placeholder="instructions" id="instructionsInput"></textarea>
+        <textarea class="big_text_field ingredients" placeholder="input ingredients/amounts here. make sure to press 'enter' between each ingredient." id="ingredientsInput"></textarea>
+        <textarea class="big_text_field instructions" placeholder="input instructions here." id="instructionsInput"></textarea>
         {{> tagInput }}
       </div>
     </div>
   </div>
   <div class="go_home">
     <a href="/{{#if id}}view/{{id}}{{/if}}" class="btn btn-default bottom_buttons">cancel</a>
-    <a href="/{{#if id}}view/{{id}}{{/if}}" id="saveButton" class="btn btn-default bottom_buttons">save</a>
+    <a href="/{{#if id}}view/{{id}}{{/if}}" id="saveButton" class="btn btn-default bottom_buttons" >save</a>
   </div>
 </template>
 
