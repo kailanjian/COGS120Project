@@ -7,7 +7,12 @@
       </div>
     </div>
     <div class="searchBar text-center">
-      <input type="text" placeholder="add guidelines" class="form-control searchInput"/>
+      <input list="dietoptions" name="dietoptionsBox" placeholder="add guidelines" class="form-control searchInput"/>
+      <datalist id="dietoptions">
+        {{#each dietoptions}}
+          <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </datalist>
       <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
     </div>
     <div class="dietsAll">
