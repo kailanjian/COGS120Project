@@ -172,6 +172,7 @@ Template.App_home.onCreated(function() {
 });
 
 Template.App_home.onRendered( function() {
+  $("#recipes_nav").css('color', '#3a86d1');
   $('#done_delete').hide();
 });
 
@@ -198,9 +199,16 @@ Template.App_home.events({
   'click .menuButtonWrapper'(event) {
     $('.sideBarOverlay').show();
   },
-  'click .removeRecipeButton'(event) {
-    $('.deleteButton').show();
-    $('#done_delete').show();
+  'click #deleteRecipeButton'(event) {
+    if($('.bottom_navigation_buttons').is(":visible")){
+      $('.deleteButton').show();
+      $('.bottom_navigation_buttons').hide();
+      $('#done_delete').show();
+    } else {
+      $('.deleteButton').hide();
+      $('.bottom_navigation_buttons').show();
+      $('#done_delete').hide();
+    }
   },
   'click #done_delete'(event) {
     $('.deleteButton').hide();

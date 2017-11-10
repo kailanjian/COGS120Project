@@ -3,7 +3,7 @@
     <!-- TODO: style for these classes are defined in home.less, maybe move to central css file -->
     <div class="top">
       <div class="titleBar">
-        <span class="h1 title">dietary preferences</span>
+        <span class="h1 title">diet</span>
       </div>
     </div>
     <div class="searchBar text-center">
@@ -24,10 +24,7 @@
     </div>
   </div>
   <i class="centered dietDisclaimer">dietary preferences are automatically saved</i>
-  <div class="go_home">
-    <a href="/" class="btn btn-default bottom_buttons">home</a>
-    <a href="#" id="remove_diet_button" class="btn btn-default bottom_buttons">delete</a>
-  </div>
+  {{> navigation_bar}}
 </template>
 
 <template name="restriction">

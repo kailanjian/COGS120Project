@@ -53,7 +53,7 @@ function initializePage() {
 }
 
 Template.App_add.onCreated(function() {
-    console.log("App_add created");
+  console.log("App_add created");
   Meteor.subscribe("recipes.user", function() {
       console.log("subscribed to user recipes")
     initializePage();

@@ -49,6 +49,10 @@ Template.App_diet.onCreated(function() {
   Meteor.subscribe("diets.user");
 })
 
+Template.App_diet.onRendered(function() {
+  $("#diet_nav").css('color', '#3a86d1');
+})
+
 Template.App_diet.helpers({
   dietoptions() {
     return DietOptions;
