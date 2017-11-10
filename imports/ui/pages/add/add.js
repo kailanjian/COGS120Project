@@ -1,4 +1,5 @@
 import './add.html';
+import '../../components/navbar/navbar.html'
 import '/imports/ui/components/tagInput/tagInput.js';
 
 import { ReactiveVar } from 'meteor/reactive-var';

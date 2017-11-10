@@ -1,4 +1,5 @@
 import './diet.html';
+import '../../components/navbar/navbar.html'
 
 import { Diets } from '/imports/api/diets/diets.js';
 
