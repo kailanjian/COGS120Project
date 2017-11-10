@@ -7,6 +7,7 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/add/add.js';
 import '../../ui/pages/view/view.js';
+import '../../ui/pages/plan/plan.js';
 import '../../ui/pages/diet/diet.js';
 import '../../ui/pages/login/login.js';
 import '../../ui/pages/signup/signup.js';
@@ -23,6 +24,13 @@ FlowRouter.route('/', {
     BlazeLayout.render('App_body', { main: 'App_home' });
   },
 });
+
+FlowRouter.route('/plan', {
+  name: 'App.plan',
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_plan' });
+  },
+})
 
 FlowRouter.route('/add', {
   name: 'App.add',
@@ -42,20 +50,6 @@ FlowRouter.route('/view/:id', {
   name: 'App.view',
   action() {
     BlazeLayout.render('App_body', { main: 'App_view' });
-  },
-})
-
-FlowRouter.route('/load', {
-  name: 'App.load',
-  action() {
-    BlazeLayout.render('App_body', { main: 'App_load' });
-  },
-})
-
-FlowRouter.route('/camera', {
-  name: 'App.camera',
-  action() {
-    BlazeLayout.render('App_body', { main: 'App_camera' });
   },
 })
 
