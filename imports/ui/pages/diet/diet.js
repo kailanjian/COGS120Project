@@ -1,5 +1,5 @@
 import './diet.html';
-import '../../components/navbar/navbar.html'
+import '../../components/navbar/navbar.js'
 
 import { Diets } from '/imports/api/diets/diets.js';
 
@@ -51,7 +51,6 @@ Template.App_diet.onCreated(function() {
 })
 
 Template.App_diet.onRendered(function() {
-  $("#diet_nav").css('color', '#3a86d1');
 })
 
 Template.App_diet.helpers({

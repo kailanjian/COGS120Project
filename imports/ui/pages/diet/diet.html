@@ -17,7 +17,7 @@
     </div>
     <div class="preferenceLabels">
       <h4>preference</h4>
-      <h4 style="margin-left: auto">need/want</h4>
+      <h4 style="margin-left: auto">importance</h4>
     </div>
     <div class="dietsAll">
       {{> restrictions}}
@@ -39,8 +39,8 @@
         </span>
         <span class="dietImportance">
           <select class="dietImportanceSelect">
-            <option value="need" {{needSelected}}>need</option>
-            <option value="want" {{wantSelected}}>want</option>
+            <option value="need" {{needSelected}}>high</option>
+            <option value="want" {{wantSelected}}>low</option>
           </select>
         </span>
       </div>

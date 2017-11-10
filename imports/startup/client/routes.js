@@ -7,8 +7,6 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/add/add.js';
 import '../../ui/pages/view/view.js';
-import '../../ui/pages/load/load.js';
-import '../../ui/pages/camera/camera.js';
 import '../../ui/pages/diet/diet.js';
 import '../../ui/pages/login/login.js';
 import '../../ui/pages/signup/signup.js';

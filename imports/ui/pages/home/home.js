@@ -172,7 +172,6 @@ Template.App_home.onCreated(function() {
 });
 
 Template.App_home.onRendered( function() {
-  $("#recipes_nav").css('color', '#3a86d1');
   $('#done_delete').hide();
 });
 
@@ -213,6 +212,7 @@ Template.App_home.events({
   'click #done_delete'(event) {
     $('.deleteButton').hide();
     $('#done_delete').hide();
+    $('.bottom_navigation_buttons').show();
   },
   'click .logoutButton'(event) {
     Meteor.logout();
