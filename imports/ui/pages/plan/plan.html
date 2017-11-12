@@ -4,9 +4,9 @@
     <span class="planDisclaimer">based on your diet preferences</span>
   </div>
   <div class="container">
-      {{> breakfast}}
-      {{> lunch}}
-      {{> dinner}}
+    {{#each internetRecipes}}
+      {{> internetRecipe}}
+    {{/each}}
   </div>
   {{> navigation_bar}}
 </template>
@@ -56,6 +56,21 @@
       <span class="tag-option white_rounded_box">delicious-diet</span>
       <span class="tag-option white_rounded_box">butter</span>
       <span class="tag-option white_rounded_box">high-environmental-impact</span>
+    </div>
+  </div>
+</template>
+
+<template name="internetRecipe">
+  <div class="container white_rounded_box plan_very_well_rounded">
+    <img class="plan_picture plan_very_well_rounded" src="{{foodUrl}}"/>
+    <h2 class="plan_recipe_title">{{name}}</h2>
+    <div class="planRecipeDetails">
+      {{time}} min | {{difficulty}} | {{meal}}
+    </div>
+    <div class="planTags">
+      {{#each tags}}
+      <span class="tag-option white_rounded_box">{{this}}</span>
+      {{/each}}
     </div>
   </div>
 </template>
