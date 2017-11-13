@@ -4,6 +4,9 @@
     <div class="top">
       <div class="titleBar">
         <span class="h1 title">diet</span>
+        <span class="addAndDeleteButtonWrapper dietMinusButton">
+          <i class="fa fa-minus" id="remove_diet_button" aria-hidden="true"></i>
+        </span>
       </div>
     </div>
     <div class="searchBar text-center">
@@ -22,10 +25,15 @@
     </div>
     <div class="dietsAll">
       {{> restrictions}}
+    </div><i class="centered dietDisclaimer">dietary preferences are automatically saved</i>
+    <div class="logoutButton centered">
+      <span class="logout_text">Sign Out</span>
     </div>
   </div>
-  <i class="centered dietDisclaimer">dietary preferences are automatically saved</i>
   {{> navigation_bar}}
+  <div class="go_home" id="dietDoneButton">
+    <span class="btn btn-default">done</span>
+  </div>
 </template>
 
 <template name="restriction">

@@ -76,7 +76,7 @@ Template.App_plan.onCreated(function() {
     console.log("recipes: ");
     console.log(recipes);
     recipes.forEach(function(recipe) {
-      recipe.keywords = 
+      recipe.keywords =
         recipe.keywords + ", " + userDiets.map((diet) => diet.name).join(",");
       console.log("keywords new: " + recipe.keywords);
     });

@@ -173,7 +173,7 @@ Template.App_home.onCreated(function() {
 });
 
 Template.App_home.onRendered( function() {
-  $('#done_delete').hide();
+  $('#homeDoneButton').hide();
 });
 
 Template.App_home.helpers({
@@ -203,24 +203,17 @@ Template.App_home.events({
     if($('.bottom_navigation_buttons').is(":visible")){
       $('.deleteButton').show();
       $('.bottom_navigation_buttons').hide();
-      $('#done_delete').show();
+      $('#homeDoneButton').show();
     } else {
       $('.deleteButton').hide();
       $('.bottom_navigation_buttons').show();
-      $('#done_delete').hide();
+      $('#homeDoneButton').hide();
     }
   },
-  'click #done_delete'(event) {
+  'click #homeDoneButton'(event) {
     $('.deleteButton').hide();
-    $('#done_delete').hide();
+    $('#homeDoneButton').hide();
     $('.bottom_navigation_buttons').show();
-  },
-  'click .logoutButton'(event) {
-    Meteor.logout();
-    if (subscription) {
-      subscription.stop();
-    }
-    FlowRouter.go('/login');
   },
   'input .searchBar'(event) {
     let text = $(".searchInput").val();

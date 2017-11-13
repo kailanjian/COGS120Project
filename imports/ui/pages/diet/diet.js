@@ -5,7 +5,7 @@ import { Diets } from '/imports/api/diets/diets.js';
 
 import { DietOptions } from '/imports/api/dietoptions/dietoptions.js';
 
-var modifications = [];
+var subscription;
 
 Template.restrictions.helpers({
   diets(){
@@ -47,10 +47,11 @@ Template.restriction.events({
 })
 
 Template.App_diet.onCreated(function() {
-  Meteor.subscribe("diets.user");
+  subscription = Meteor.subscribe("diets.user");
 })
 
 Template.App_diet.onRendered(function() {
+  $('#dietDoneButton').hide();
 })
 
 Template.App_diet.helpers({
@@ -70,13 +71,28 @@ Template.App_diet.events({
     }
   },
   'click #remove_diet_button'(event) {
-    if($('.deleteButton').is(':visible') || $('.deleteButton').length == 0){
-      $('.deleteButton').hide();
-      $('#remove_diet_button').text("delete");
-    } else {
+    console.log("hi");
+    if($('.bottom_navigation_buttons').is(':visible')){
       $('.deleteButton').show();
-      $('#remove_diet_button').text("done");
+      $('.bottom_navigation_buttons').hide();
+      $('#dietDoneButton').show();
+    } else {
+      $('.deleteButton').hide();
+      $('.bottom_navigation_buttons').show();
+      $('#dietDoneButton').hide();
     }
+  },
+  'click #homeDoneButton'(event) {
+    $('.deleteButton').hide();
+    $('#dietDoneButton').hide();
+    $('.bottom_navigation_buttons').show();
+  },
+  'click .logoutButton'(event) {
+    Meteor.logout();
+    if (subscription) {
+      subscription.stop();
+    }
+    FlowRouter.go('/login');
   }
 })
 
