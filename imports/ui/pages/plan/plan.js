@@ -65,9 +65,17 @@ Template.App_plan.onCreated(function() {
     // tODO why isn't this showing up
     let userDiets = Diets.find({}).map((item) => item);
 
-    recipeDataDynamic.set(recipeDataMock);
-    console.log("userDiets: " + userDiets);
-    recipeDataDynamic.get().forEach(function(recipe) {
+    let mockCopy = $.extend(true, {}, recipeDataMock);
+    console.log("mockCopy: ");
+    console.log(mockCopy);
+    let mockCopyArr = Object.keys(mockCopy).map((i) => mockCopy[i])
+    recipeDataDynamic.set(mockCopyArr);
+    console.log("mockCopyArr: ");
+    console.log(mockCopyArr);
+    let recipes = recipeDataDynamic.get();
+    console.log("recipes: ");
+    console.log(recipes);
+    recipes.forEach(function(recipe) {
       recipe.keywords = 
         recipe.keywords + ", " + userDiets.map((diet) => diet.name).join(",");
       console.log("keywords new: " + recipe.keywords);
