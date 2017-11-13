@@ -12,6 +12,7 @@ let difficultyInput = undefined;
 let mealInput = undefined;
 let foodImg = undefined;
 let recipeImg = undefined;
+let tagInput = new ReactiveVar([]);
 
 var id = new ReactiveVar("");
 var filledOut = false;
@@ -32,7 +33,14 @@ function initializePage() {
   $("#timeInput").val(recipe.time);
   $(".ingredients").val(recipe.ingredients);
   $(".instructions").val(recipe.instructions);
-  $(".keywords").val(recipe.keywords);
+  //$(".keywords").val(recipe.keywords);
+  if (recipe.keywords) {
+    tagInput.set(recipe.keywords.split(",").map((keyword) => keyword.trim()));
+    console.log(recipe.keywords.split(",").map((keyword) => keyword.trim()));
+  }
+  else 
+    tagInput.set([]);
+
   difficultyInput = recipe.difficulty;
   mealInput = recipe.meal;
   foodImg = recipe.foodImg;
@@ -70,6 +78,12 @@ Template.App_add.helpers({
     id() {
         console.log("id helper ran: " + id);
         return id.get();
+    },
+    dietoptions() {
+        return DietOptions;
+    },
+    matchedTags() {
+        return tagInput.get();
     }
 })
 
@@ -83,6 +97,28 @@ Template.App_add.events({
     "change #recipe-photo-input"(event) {
         $(".recipe_photo_button").text("added recipe photo");
     },
+    "input .keywordInput"(event) {
+        let input = event.currentTarget.value.trim();
+        console.log("input: " + input);
+        let currTags = tagInput.get();
+        if (currTags.indexOf(input) < 0)
+            currTags.push(input);
+        tagInput.set(currTags);
+        // TODO check for duplicates
+        event.currentTarget.value = "";
+    },
+    "click .tag-option"(event) {
+        console.log(event);
+        // need to trim because outerText grabs whitespace too
+        let selectedTag = event.currentTarget.outerText.trim();
+        console.log("clicked tag: " + selectedTag);
+        let currTags = tagInput.get();
+        let selectedIndex = currTags.indexOf(selectedTag);
+        console.log("selectedIndex: " + selectedIndex);
+        currTags.splice(selectedIndex, 1);
+        tagInput.set(currTags);
+
+    },
     "click #saveButton"(event) {
         event.preventDefault();
         // collect all data
@@ -95,7 +131,9 @@ Template.App_add.events({
         let time = $("#timeInput").val();
         let ingredients = $("#ingredientsInput").val();
         let instructions = $("#instructionsInput").val();
-        let keywords = $("#keywordsInput").val();
+        let keywords = tagInput.get().join(", ");
+        console.log("saving keywords: ");
+        console.log(tagInput.get() + " as " + tagInput.get().join(", "));
 
         let recipePhotoInput = $("#recipe-photo-input").prop("files");
         let recipeFile = recipePhotoInput[0];

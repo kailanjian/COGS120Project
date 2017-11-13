@@ -14,6 +14,7 @@ var searchText;
 var subscription;
 
 function isRecommendedRecipe(checkRecipe) {
+  return false;
   var recipes = Recipes.find({}).map(function (recipe) {
     return recipe;
   });
