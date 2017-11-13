@@ -7,12 +7,13 @@
       </div>
     </div>
     <div class="searchBar text-center">
-      <input list="dietoptions" name="dietoptionsBox" placeholder="add preferences" class="form-control searchInput"/>
-      <datalist id="dietoptions">
+      <!--<input list="dietoptions" name="dietoptionsBox" placeholder="add preferences" class="form-control searchInput"/>-->
+      <select id="dietoptions" class="form-control searchInput">
+        <option value="">Select a diet to add it...</option>
         {{#each dietoptions}}
           <option value="{{this}}">{{this}}</option>
         {{/each}}
-      </datalist>
+      </select>
       <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
     </div>
     <div class="preferenceLabels">

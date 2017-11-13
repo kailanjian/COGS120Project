@@ -10,6 +10,10 @@ Meteor.methods({
   },
 
   'diets.insert'(name, importance, owner) {
+      if (Diets.findOne({name: name})) {
+        return;
+      }
+
       return Diets.insert({
         name: name,
         importance: importance,
