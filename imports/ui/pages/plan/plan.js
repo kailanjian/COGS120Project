@@ -61,6 +61,10 @@ Template.App_plan.helpers({
 })
 
 Template.App_plan.onCreated(function() {
+  for(var i = 0; i < 20; i++){
+    recipeDataMock.push(recipeDataMock[i]);
+  }
+
   Meteor.subscribe('diets.user', function() {
     // tODO why isn't this showing up
     let userDiets = Diets.find({}).map((item) => item);
