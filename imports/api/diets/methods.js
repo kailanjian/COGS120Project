@@ -10,7 +10,7 @@ Meteor.methods({
   },
 
   'diets.insert'(name, importance, owner) {
-      if (Diets.findOne({name: name})) {
+      if (Diets.findOne({name: name, owner: Meteor.userId()})) {
         return;
       }
 
