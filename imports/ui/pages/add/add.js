@@ -23,6 +23,16 @@ function initializePage() {
   // initialize page data
   id.set(FlowRouter.current().params.id);
   let recipe = Recipes.findOne(id.get())
+
+  // clear out globals
+  difficultyInput = undefined;
+  mealInput = undefined;
+  foodImg = undefined;
+  recipeImg = undefined;
+  tagInput.set([]);
+
+  filledOut = false;
+
   if (!id.get())
     return;
 
@@ -126,65 +136,150 @@ Template.App_add.events({
         let name = $(".recipe_name").val();
         let difficulty = difficultyInput;
         let meal = mealInput;
-        console.log("inserted recipe with meal " + meal);
         let servings = $("#servingsInput").val();
         let time = $("#timeInput").val();
         let ingredients = $("#ingredientsInput").val();
         let instructions = $("#instructionsInput").val();
         let keywords = tagInput.get().join(", ");
+        console.log("trying to save " + name + "...");
         console.log("saving keywords: ");
         console.log(tagInput.get() + " as " + tagInput.get().join(", "));
 
         let recipePhotoInput = $("#recipe-photo-input").prop("files");
         let recipeFile = recipePhotoInput[0];
-        let fileInput = $("#file-input").prop("files");
-        let file = fileInput[0];
+        let foodFileInput = $("#file-input").prop("files");
+        let foodFile = foodFileInput[0];
+
+        let recipePhotoPromise = new Promise((resolve, reject) => {
+            console.log("recipeFile: " + recipeFile);
+            if (!recipeFile)
+                resolve("")
+            else {
+                Images.insert(recipeFile, function(err, file) {
+                    if (file)
+                        resolve(file._id);
+
+                    // probably never called but lets hope this method never fails
+                    reject("Err: " + err);
+                });
+            }
+        });
+        
+        let foodPhotoPromise = new Promise((resolve, reject) => {
+            console.log("foodFile: " + foodFile);
+            if (!foodFile) {
+                resolve("");
+            } else {
+                Images.insert(foodFile, function(err, file) {
+                    if (file)
+                        resolve(file._id);
+
+                    // probably never called but lets hope this method never fails
+                    reject("Err: " + err);
+                });
+            }
+        });
+
+        recipePhotoPromise.then(function(recipePhotoId) {
+            foodPhotoPromise.then(function(foodPhotoId) {
+                console.log("wow you used promises correctly");
+                let isValid = validateInputs(recipePhotoId);
+                
+                if (!isValid) {
+                    return;
+                }
+
+                // is valid
+                if (id.get()) {
+                    console.log("updating recipe");
+                    console.log("id: " + id.get());
+                    console.log("name: " + name);
+                    console.log("difficulty: " + difficulty);
+                    Meteor.call('recipes.update', id.get(),
+                        name,
+                        time,
+                        difficulty,
+                        meal,
+                        servings,
+                        ingredients,
+                        instructions,
+                        keywords,
+                        foodPhotoId,
+                        recipePhotoId,
+                        Meteor.userId());
+                        FlowRouter.go("/view/"+id.get());
+                } else {
+                    console.log("inserting recipe");
+                    Meteor.call('recipes.insert',
+                        name,
+                        time,
+                        difficulty,
+                        meal,
+                        servings,
+                        ingredients,
+                        instructions,
+                        keywords,
+                        foodPhotoId,
+                        recipePhotoId,
+                        Meteor.userId())
+                    FlowRouter.go("/");
+                }
+            });
+        });
+
+
+        function validateInputs(recipeFile) {
+            if(!name)
+            {
+                alert("Please add in a name for your recipe!")
+                return false;
+            }
+
+            if(difficultyInput == null || mealInput== null)
+            {
+                alert("Please select the difficulty/time of the meal!");
+                return false;
+            }
+            
+            if(!time)
+            {
+                alert("Please add in how much time it takes to make!")
+                return false;
+            }
+
+            if(!servings)
+            {
+                alert("Please indicate the number of servings this recipe has!")
+                return false;
+            }
+
+            if(!recipeFile && !instructions)
+            {
+                alert("Please input instructions!");
+                return false;
+            }
+            if(!recipeFile && !ingredients)
+            {
+                alert("Please input ingredients!");
+                return false;
+            }
+
+            return true;
+        }
+        // todo: if a recipe image is inserted, will bypass the validation
+        /*
         if (recipeFile) {
             console.log("inserting recipeFile");
             Images.insert(recipeFile, finishedPhotoInput);
         } else {
             finishedPhotoInput(undefined, undefined);
-        }
-        if(!name)
-        {
-            alert("Please add in a name for your recipe!")
-            return;
-        }
-        if(difficultyInput == null || mealInput== null)
-        {
-            alert("Please select the difficulty/time of the meal!");
-            return;
-        }
-       if(!time)
-       {
-           alert("Please add in how much time it takes to make!")
-           return;
-       }
-       if(!servings)
-       {
-           alert("Please indicate the number of servings this recipe has!")
-           return;
-       }
+        }*/
 
-        if(!recipeFile && !instructions)
-        {
-            alert("Please input instructions!");
-            return;
-        }
-        if(!recipeFile && !ingredients)
-        {
-            alert("Please input ingredients!");
-            return;
-        }
+        // filledOut = true;
 
-        filledOut = true;
-
-        function shakethebox(target){
-
-            console.log(target);
-        }
-
+        /*
         function finishedPhotoInput(err, res) {
+            console.log("Starting save, is the form filled out?");
             console.log(filledOut);
             if (!filledOut){
               return;
@@ -202,7 +297,8 @@ Template.App_add.events({
                 finishedFile(undefined, undefined);
             }
         }
-
+        */
+        /*
         function finishedFile(err, res) {
             if (!filledOut){
               return;
@@ -252,10 +348,7 @@ Template.App_add.events({
             }
         }
 
-
-        if (filledOut){
-          FlowRouter.go("/")
-        }
+        */
     }
 });
 

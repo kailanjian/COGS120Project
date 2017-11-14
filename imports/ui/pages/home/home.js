@@ -187,7 +187,9 @@ Template.App_home.helpers({
 
 Template.App_home.helpers({
   UserName(){
-    return Meteor.user().profile.name
+    if (Meteor.user())
+      return Meteor.user().profile.name
+    return "";
   }
 })
 
