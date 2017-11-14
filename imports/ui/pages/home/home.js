@@ -14,6 +14,7 @@ var searchText;
 var subscription;
 
 function isRecommendedRecipe(checkRecipe) {
+  // hide the recommendations by filtering always to false
   return false;
   var recipes = Recipes.find({}).map(function (recipe) {
     return recipe;
@@ -232,7 +233,7 @@ Template.recipeGroup.helpers({
     // important to activate Tracker
     var search = searchText.get();
     var filteredClassifier = function(recipe) {
-      if (classifier(recipe) && recipe.name.match(new RegExp(search, 'i'))){
+      if (classifier(recipe) && (recipe.name.match(new RegExp(search, 'i')) || recipe.keywords.match(new RegExp(search, 'i')))){
         return true;
       }
       return false;
