@@ -2,9 +2,11 @@ import "./plan.html"
 
 import { Diets } from '/imports/api/diets/diets.js';
 import { DietOptions } from '/imports/api/dietoptions/dietoptions.js';
+import { Images } from '/imports/api/images/images.js';
 
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
+
 
 let recipeDataMock = [
   { name: "Pancakes",
@@ -60,7 +62,31 @@ Template.App_plan.helpers({
   }
 })
 
+Template.App_plan.events({
+  "click .saveButton"(event) {
+    console.log(this.name);
+    console.log("save clicked");
+    console.log("url: ");
+    console.log(this.foodUrl);
+    console.log(this);
+    let curr = this;
+    var fileObj = new FS.File();
+    fileObj.attachData(this.foodUrl, function () {
+      Images.insert(fileObj, function (err, fileObj) {
+        console.log(fileObj._id);
+        Meteor.call("recipes.insert", 
+          curr.name, curr.time, curr.difficulty,
+          curr.meal, curr.servings, curr.ingredients,
+          curr.instructions, curr.keywords, fileObj._id, undefined, Meteor.userId());
+        alert("Recipe saved successfully!");
+        FlowRouter.go("/");
+      });
+    });
+  }
+})
+
 Template.App_plan.onCreated(function() {
+  Meteor.subscribe('images.all');
   Meteor.subscribe('diets.user', function() {
     // tODO why isn't this showing up
     let userDiets = Diets.find({}).map((item) => item);
@@ -76,8 +102,12 @@ Template.App_plan.onCreated(function() {
     console.log("recipes: ");
     console.log(recipes);
     recipes.forEach(function(recipe) {
+      additionalUserDiets = userDiets.map((diet) => diet.name).join(",");
+      if (additionalUserDiets) {
+        additionalUserDiets = ", " + additionalUserDiets;
+      }
       recipe.keywords =
-        recipe.keywords + ", " + userDiets.map((diet) => diet.name).join(",");
+        recipe.keywords + additionalUserDiets;
       console.log("keywords new: " + recipe.keywords);
     });
   });
