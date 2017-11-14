@@ -3,16 +3,16 @@
     <!-- TODO: style for these classes are defined in home.less, maybe move to central css file -->
     <div class="top">
       <div class="titleBar">
-        <span class="h1 title">diet</span>
+        <span class="h1 title">profile</span>
         <span class="addAndDeleteButtonWrapper dietMinusButton">
-          <i class="fa fa-minus" id="remove_diet_button" aria-hidden="true"></i>
+          <span id="remove_diet_button">edit</span>
         </span>
       </div>
     </div>
     <div class="searchBar text-center">
       <!--<input list="dietoptions" name="dietoptionsBox" placeholder="add preferences" class="form-control searchInput"/>-->
       <select id="dietoptions" class="form-control searchInput">
-        <option value="">Select a diet to add it...</option>
+        <option value="">add a diet preference...</option>
         {{#each dietoptions}}
           <option value="{{this}}">{{this}}</option>
         {{/each}}
@@ -20,7 +20,7 @@
       <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
     </div>
     <div class="preferenceLabels">
-      <h4>preference</h4>
+      <h4>diet preference</h4>
       <h4 style="margin-left: auto">priority</h4>
     </div>
     <div class="dietsAll">
