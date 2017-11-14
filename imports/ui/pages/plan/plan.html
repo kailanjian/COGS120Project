@@ -1,12 +1,13 @@
 <template name="App_plan">
   <div class="container planTitleBar">
-    <span class="h1 title">today</span>
-    <span class="planDisclaimer">based on your diet preferences</span>
+    <span class="h1 title">discover</span>
+    <span class="planDisclaimer">based on diet preferences</span>
   </div>
   <div class="container">
     {{#each internetRecipes}}
       {{> internetRecipe}}
     {{/each}}
+    <i class="planEnd centered">there are no more recipes to load</i>
   </div>
   {{> navigation_bar}}
 </template>

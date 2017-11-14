@@ -82,12 +82,15 @@ Template.App_diet.events({
       $('#dietDoneButton').hide();
     }
   },
-  'click #homeDoneButton'(event) {
+  'click #dietDoneButton'(event) {
     $('.deleteButton').hide();
     $('#dietDoneButton').hide();
     $('.bottom_navigation_buttons').show();
   },
   'click .logoutButton'(event) {
+    if(!confirm("Are you sure you want to logout?")){
+      return;
+    }
     Meteor.logout();
     if (subscription) {
       subscription.stop();
