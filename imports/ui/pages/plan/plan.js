@@ -73,6 +73,8 @@ Template.App_plan.events({
     var fileObj = new FS.File();
     fileObj.attachData(this.foodUrl, function () {
       Images.insert(fileObj, function (err, fileObj) {
+        console.log("trying to insert image");
+        console.log(err);
         console.log(fileObj);
         console.log(fileObj._id);
         Meteor.call("recipes.insert", 
