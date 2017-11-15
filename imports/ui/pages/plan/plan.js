@@ -23,7 +23,7 @@ let recipeDataMock = [
     owner: "internet"
   },
   {
-    name: "BLT",
+    name: "Tuna Sandwich",
     time: 20,
     difficulty: "easy",
     meal: "lunch",
@@ -32,7 +32,7 @@ let recipeDataMock = [
     instructions: "cook ingredients \n eat",
     keywords: "low-carb, low-fat",
     foodImg: "url",
-    foodUrl: "http://hagerstownpizzabrothers.com/wp-content/uploads/2015/02/BLT-Sandwich.jpg",
+    foodUrl: "https://static01.nyt.com/images/2015/11/19/dining/19COOKING-TUNACLUB/19COOKING-TUNACLUB-superJumbo.jpg",
     recipeImg: undefined,
     owner: "internet"
   },
@@ -46,7 +46,7 @@ let recipeDataMock = [
     instructions: "cook ingredients \n eat",
     keywords: "high-environmental-impact",
     foodImg: "url",
-    foodUrl: "https://www.nestleprofessional.us/sites/g/files/gfb131/f/styles/recipe/public/media/beefy-roasted-steak-potatoes-gluten-free-minors-nestle-professional-food-service-recipe-540x400.jpg?itok=652ZCHdN",
+    foodUrl: "https://static01.nyt.com/images/2014/05/18/magazine/18eat/18eat-articleLarge-v3.jpg",
     recipeImg: undefined,
     owner: "internet"
   },
@@ -115,9 +115,26 @@ Template.App_plan.onCreated(function() {
       console.log("keywords new: " + recipe.keywords);
     });
   });
-})
+});
 
 Template.App_plan.onRendered(function() {
+});
+
+Template.internetRecipe.onRendered(function() {
+  $(".discoverRecipeHidden").hide();
+});
+
+Template.internetRecipe.events({
+  'click #seeMore' (event) {
+    let uncle = event.target.parentElement.previousElementSibling;
+    if($(uncle).is(":visible")) {
+      $(uncle).hide();
+      $(event.target).text("show more...")
+    } else {
+      $(uncle).show();
+      $(event.target).text("see less...")
+    }
+  }
 });
 
 Template.internetRecipe.helpers({
@@ -125,4 +142,4 @@ Template.internetRecipe.helpers({
     console.log(this);
     return this.keywords.split(",").map((keyword) => keyword.trim());
   }
-})
+});

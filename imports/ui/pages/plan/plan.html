@@ -14,7 +14,6 @@
 
 <template name="internetRecipe">
   <div class="container white_rounded_box plan_very_well_rounded">
-    <button class="saveButton">Save</button>
     <img class="plan_picture plan_very_well_rounded" src="{{foodUrl}}"/>
     <h2 class="plan_recipe_title">{{name}}</h2>
     <div class="planRecipeDetails">
@@ -24,6 +23,16 @@
       {{#each tags}}
       <span class="tag-option white_rounded_box">{{this}}</span>
       {{/each}}
+    </div>
+    <div class="discoverRecipeHidden">
+      <h3>ingredients:</h3>
+      {{ingredients}}
+      <h3>instructions:</h3>
+      {{instructions}}
+    </div>
+    <div class="discoverRecipeBottom">
+      <span id="seeMore" class="discoverRecipeBottomText">see more...</span>
+      <span class="saveButton discoverRecipeBottomText">save to my recipes</span>
     </div>
   </div>
 </template>
