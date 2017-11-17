@@ -35,23 +35,23 @@
         </form>
       </div>
       <div>
-        <textarea class="big_text_field ingredients white_rounded_box" placeholder="input ingredients and their amounts here. make sure to press 'enter' between each ingredient." id="ingredientsInput"></textarea>
-        <textarea class="big_text_field instructions white_rounded_box" placeholder="input instructions here." id="instructionsInput"></textarea>
-          <!-- todo: make this work -->
-          <div class="tag-selection">
-            {{#each matchedTags}}
-            <span class="tag-option white_rounded_box">
-              {{this}}
-              <i class="fa fa-times-circle"></i>
-            </span>
-            {{/each}}
-          </div>
         <select class="form-control keywordInput keywords">
           <option value="">Select a diet to add it...</option>
           {{#each dietoptions}}
             <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
+        <!-- todo: make this work -->
+        <div class="tag-selection">
+          {{#each matchedTags}}
+            <span class="tag-option white_rounded_box">
+            {{this}}
+              <i class="fa fa-times-circle"></i>
+          </span>
+          {{/each}}
+        </div>
+        <textarea class="big_text_field ingredients white_rounded_box" placeholder="input ingredients and their amounts here. make sure to press 'enter' between each ingredient." id="ingredientsInput"></textarea>
+        <textarea class="big_text_field instructions white_rounded_box" placeholder="input instructions here." id="instructionsInput"></textarea>
       </div>
     </div>
   </div>
