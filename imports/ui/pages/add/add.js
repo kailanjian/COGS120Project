@@ -11,7 +11,6 @@ import {DietOptions} from '/imports/api/dietoptions/dietoptions.js';
 let difficultyInput = undefined;
 let mealInput = undefined;
 let foodImg = undefined;
-var thereExistsARecipeAlready = undefined;
 let recipeImg = undefined;
 let tagInput = new ReactiveVar([]);
 
@@ -56,19 +55,9 @@ function initializePage() {
   mealInput = recipe.meal;
   foodImg = recipe.foodImg;
   recipeImg = recipe.recipeImg;
-  $(".difficulty_and_servings .selector_buttons").each(function () {
-    console.log(this);
-    console.log($(this));
-    if ($(this)[0].outerText == difficultyInput) {
-      console.log("matched");
-      $(this).css("background-color", "#DEDEDE");
-    }
-  })
-  $(".meal .selector_buttons").each(function () {
-    if ($(this)[0].outerText == mealInput) {
-      $(this).css("background-color", "#DEDEDE");
-    }
-  });
+
+  $("#difficultySelector").val(recipe.difficulty);
+  $("#mealSelector").val(recipe.meal);
 }
 
 Template.App_add.onCreated(function () {
@@ -138,8 +127,8 @@ Template.App_add.events({
     // collect all data
     // todo: images
     let name = $(".recipe_name").val();
-    let difficulty = difficultyInput;
-    let meal = mealInput;
+    let difficulty = $("#difficultySelector").val();
+    let meal = $("#mealSelector").val();
     let servings = $("#servingsInput").val();
     let time = $("#timeInput").val();
     let ingredients = $("#ingredientsInput").val();
@@ -148,6 +137,9 @@ Template.App_add.events({
     console.log("trying to save " + name + "...");
     console.log("saving keywords: ");
     console.log(tagInput.get() + " as " + tagInput.get().join(", "));
+
+    difficultyInput = difficulty;
+    mealInput = meal;
 
     let recipePhotoInput = $("#recipe-photo-input").prop("files");
     let recipeFile = recipePhotoInput[0];

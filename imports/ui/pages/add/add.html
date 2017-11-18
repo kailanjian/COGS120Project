@@ -12,7 +12,7 @@
       <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name" required>
       <div class="difficulty_and_servings">
         <div class="inline">
-          {{>difficulty}}
+          {{>mealOfDay}}
         </div>
         <div class="inline text_and_input">
           <span>servings:</span>
@@ -21,10 +21,10 @@
       </div>
       <div class="meal">
         <div class="inline">
-          {{>mealOfDay}}
+          {{>difficulty}}
         </div>
         <div class="text_and_input time">
-          <span>time:</span>
+          <span>time (min):</span>
           <input type="number" id="timeInput" class="small_input white_rounded_box">
         </div>
       </div>
@@ -36,7 +36,7 @@
       </div>
       <div>
         <select class="form-control keywordInput keywords">
-          <option value="">Select a diet to add it...</option>
+          <option value="">add a diet preference...</option>
           {{#each dietoptions}}
             <option value="{{this}}">{{this}}</option>
           {{/each}}
@@ -74,19 +74,21 @@
 </template>
 
 <template name = "difficulty">
-  <span class = "selector_buttons">easy</span>
-  <span>|</span>
-  <span class = "selector_buttons">med</span>
-  <span>|</span>
-  <span class = "selector_buttons">hard</span>
+  <span>difficulty:</span>
+  <select id="difficultySelector" class="white_rounded_box">
+    <option value="easy">easy</option>
+    <option value="med">med</option>
+    <option value="hard">hard</option>
+  </select>
 </template>
 
 <template name = "mealOfDay">
-  <span class = "selector_buttons">breakfast</span>
-  <span>|</span>
-  <span class = "selector_buttons">lunch</span>
-  <span>|</span>
-  <span class = "selector_buttons">dinner</span>
+  <span>meal:</span>
+  <select id="mealSelector" class="white_rounded_box">
+    <option value="breakfast">breakfast</option>
+    <option value="lunch">lunch</option>
+    <option value="dinner">dinner</option>
+  </select>
 </template>
 
 
