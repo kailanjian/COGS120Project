@@ -1,9 +1,11 @@
 <template name="App_view">
   {{#with currentRecipe}}
   <div class="picture_holder">
-    <img class="recipeImg" src="/cfs/files/images/{{foodImg}}"/>
+    {{#if foodImg}}
+      <img class="recipeImg" src="/cfs/files/images/{{foodImg}}"/>
+    {{/if}}
   </div>
-  <div>
+  <div class="bottom_element">
     <div class="container">
       <div class="view_recipe_name">{{name}}</div>
       <div class="difficulty_and_servings">
@@ -24,7 +26,9 @@
       </div>
       <div class="recipeImgContainer">
         <!--// recipe image here-->
-        <img src="/cfs/files/images/{{recipeImg}}" class="recipeImg"/>
+        {{#if recipeImg}}
+          <img src="/cfs/files/images/{{recipeImg}}" class="recipeImg"/>
+        {{/if}}
       </div>
       <div>
         <span class="h2">Ingredients: </span>

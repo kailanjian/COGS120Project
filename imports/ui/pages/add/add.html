@@ -7,12 +7,12 @@
       <span id="foodPhotoDescription">add food photo</span>
     </div>
   </div>
-  <div>
+  <div class="bottom_element">
     <div class="container">
       <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name" required>
       <div class="difficulty_and_servings">
         <div class="inline">
-          {{>difficulty}}
+          {{>mealOfDay}}
         </div>
         <div class="inline text_and_input">
           <span>servings:</span>
@@ -21,10 +21,10 @@
       </div>
       <div class="meal">
         <div class="inline">
-          {{>mealOfDay}}
+          {{>difficulty}}
         </div>
         <div class="text_and_input time">
-          <span>time:</span>
+          <span>time (min):</span>
           <input type="number" id="timeInput" class="small_input white_rounded_box">
         </div>
       </div>
@@ -35,23 +35,23 @@
         </form>
       </div>
       <div>
-        <textarea class="big_text_field ingredients white_rounded_box" placeholder="input ingredients and their amounts here. make sure to press 'enter' between each ingredient." id="ingredientsInput"></textarea>
-        <textarea class="big_text_field instructions white_rounded_box" placeholder="input instructions here." id="instructionsInput"></textarea>
-          <!-- todo: make this work -->
-          <div class="tag-selection">
-            {{#each matchedTags}}
-            <span class="tag-option white_rounded_box">
-              {{this}}
-              <i class="fa fa-times-circle"></i>
-            </span>
-            {{/each}}
-          </div>
         <select class="form-control keywordInput keywords">
-          <option value="">Select a diet to add it...</option>
+          <option value="">add a diet preference...</option>
           {{#each dietoptions}}
             <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
+        <!-- todo: make this work -->
+        <div class="tag-selection">
+          {{#each matchedTags}}
+            <span class="tag-option white_rounded_box">
+            {{this}}
+              <i class="fa fa-times-circle"></i>
+          </span>
+          {{/each}}
+        </div>
+        <textarea class="big_text_field ingredients white_rounded_box" placeholder="input ingredients and their amounts here. make sure to press 'enter' between each ingredient." id="ingredientsInput"></textarea>
+        <textarea class="big_text_field instructions white_rounded_box" placeholder="input instructions here." id="instructionsInput"></textarea>
       </div>
     </div>
   </div>
@@ -74,19 +74,21 @@
 </template>
 
 <template name = "difficulty">
-  <span class = "selector_buttons">easy</span>
-  <span>|</span>
-  <span class = "selector_buttons">med</span>
-  <span>|</span>
-  <span class = "selector_buttons">hard</span>
+  <span>difficulty:</span>
+  <select id="difficultySelector" class="white_rounded_box">
+    <option value="easy">easy</option>
+    <option value="med">med</option>
+    <option value="hard">hard</option>
+  </select>
 </template>
 
 <template name = "mealOfDay">
-  <span class = "selector_buttons">breakfast</span>
-  <span>|</span>
-  <span class = "selector_buttons">lunch</span>
-  <span>|</span>
-  <span class = "selector_buttons">dinner</span>
+  <span>meal:</span>
+  <select id="mealSelector" class="white_rounded_box">
+    <option value="breakfast">breakfast</option>
+    <option value="lunch">lunch</option>
+    <option value="dinner">dinner</option>
+  </select>
 </template>
 
 
