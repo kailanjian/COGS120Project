@@ -13,6 +13,7 @@ Template.App_view.onCreated(function() {
   id.set(FlowRouter.current().params.id);
   console.log("set id to " + id.get);
 });
+
 Template.App_view.helpers({
   currentRecipe() {
     console.log("ran helper: " + id.get());

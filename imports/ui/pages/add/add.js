@@ -184,6 +184,12 @@ Template.App_add.events({
             foodPhotoPromise.then(function(foodPhotoId) {
                 console.log("wow you used promises correctly");
                 let isValid = validateInputs(recipePhotoId);
+
+                if (!recipePhotoId && recipeImg) 
+                    recipePhotoId = recipeImg;
+                
+                if (!foodPhotoId && foodImg)
+                    foodPhotoId = foodImg;
                 
                 if (!isValid) {
                     return;
