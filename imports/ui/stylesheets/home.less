@@ -32,19 +32,22 @@ body {
   justify-content: left;
 }
 
-.addButtonWrapper{
+.addButtonWrapper, .addButtonWrapper:hover{
   // margin-top: 0.25rem;
+  background-color: #3f00c7;
   cursor: pointer;
-  color: black;
+  color: @primary;
   text-decoration: none !important;
   margin-left: auto;
-}
-
-.addButtonWrapper:hover {
-  cursor: pointer;
-  color: black;
-  text-decoration: none !important;
-  margin-left: auto;
+  width: 63px;
+  height: 60px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 1.5rem;
+  bottom: 5rem;
 }
 
 .titleBar .title{

@@ -1,60 +1,63 @@
 <template name="App_home">
-<div class="container">
-  <div class="top">
-    <div class="titleBar">
-      <span class="h1 title">recipes</span>
-      <a href="/add" class="addButtonWrapper">
-        <h2>+</h2>
-      </a>
+    <div class="container">
+      <div class="top">
+        <div class="titleBar">
+          <span class="h1 title">recipes</span>
+        </div>
+        <div class="searchBar text-center">
+          <input type="text" placeholder="search by name and diet preference" class="form-control searchInput"/>
+          <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
+        </div>
+      </div>
+      {{#if noRecipes}}
+        <div class="no_recipes">
+          <h5 class="centered">Oh no! You don't have any recipes.</h5>
+          <span class="centered no_recipes_instructions">Click on "+" to add your own recipes</span>
+          <span class="centered no_recipes_instructions">or save recipes from "Discover"</span>
+        </div>
+      {{/if}}
     </div>
-    <div class="searchBar text-center">
-      <input type="text" placeholder="search by name and diet preference" class="form-control searchInput"/>
-      <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
-    </div>
+  <div class="bottom_element">
+    {{#each recipeGroups}}
+      {{> recipeGroup}}
+    {{/each}}
   </div>
-  {{#if noRecipes}}
-    <div class="no_recipes">
-      <h5 class="centered">Oh no! You don't have any recipes.</h5>
-      <span class="centered no_recipes_instructions">Click on "+" to add your own recipes</span>
-      <span class="centered no_recipes_instructions">or save recipes from "Discover"</span>
-    </div>
-  {{/if}}
-</div>
-{{#each recipeGroups}}
-  {{> recipeGroup}}
-{{/each}}
 
-{{> navigation_bar}}
+    <a href="/add" class="addButtonWrapper">
+      <h2>+</h2>
+    </a>
+
+    {{> navigation_bar}}
 </template>
 
 <!-- Display a Recipe -->
 <template name="recipe">
-<a href="/view/{{_id}}" class="recipeItem">
-  <div class="recipeOuter container">
-    <div class="imageContainer">
-      <div class="imagePlaceholder"></div>
-    </div>
-    <div class="recipeInner">
-      <div class="recipeName">
-        {{name}}
+  <a href="/view/{{_id}}" class="recipeItem">
+    <div class="recipeOuter container">
+      <div class="imageContainer">
+        <div class="imagePlaceholder"></div>
       </div>
-      <div class="recipeDetails">
-        {{time}} min | {{difficulty}} | {{meal}}
+      <div class="recipeInner">
+        <div class="recipeName">
+          {{name}}
+        </div>
+        <div class="recipeDetails">
+          {{time}} min | {{difficulty}} | {{meal}}
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
 </template>
 
 <template name="recipeGroup">
-{{#if recipes}}
-  <div class="groupBar container">
-    <span>{{name}}</span>
-  </div>
-  <div class="groupContent">
+  {{#if recipes}}
+    <div class="groupBar container">
+      <span>{{name}}</span>
+    </div>
+    <div class="groupContent">
       {{#each recipes}}
         {{> recipe}}
       {{/each}}
-  </div>
-{{/if}}
+    </div>
+  {{/if}}
 </template>
