@@ -1,33 +1,33 @@
 <template name="App_home">
-    <div class="container">
-      <div class="top">
-        <div class="titleBar">
-          <span class="h1 title">recipes</span>
-        </div>
-        <div class="searchBar text-center">
-          <input type="text" placeholder="search by name and diet preference" class="form-control searchInput"/>
-          <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
-        </div>
+  <div class="container">
+    <div class="top">
+      <div class="titleBar">
+        <span class="h1 title">recipes</span>
       </div>
-      {{#if noRecipes}}
-        <div class="no_recipes">
-          <h5 class="centered">Oh no! You don't have any recipes.</h5>
-          <span class="centered no_recipes_instructions">Click on "+" to add your own recipes</span>
-          <span class="centered no_recipes_instructions">or save recipes from "Discover"</span>
-        </div>
-      {{/if}}
+      <div class="searchBar text-center">
+        <input type="text" placeholder="search by name and diet preference" class="form-control searchInput"/>
+        <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
+      </div>
     </div>
+    {{#if noRecipes}}
+      <div class="no_recipes">
+        <h5 class="centered">Oh no! You don't have any recipes.</h5>
+        <span class="centered no_recipes_instructions">Click on "+" to add your own recipes</span>
+        <span class="centered no_recipes_instructions">or save recipes from "Discover"</span>
+      </div>
+    {{/if}}
+  </div>
   <div class="bottom_element">
     {{#each recipeGroups}}
       {{> recipeGroup}}
     {{/each}}
   </div>
 
-    <a href="/add" class="addButtonWrapper">
-      <h2>+</h2>
-    </a>
+  <a href="/add" class="addButtonWrapper">
+    <h2>+</h2>
+  </a>
 
-    {{> navigation_bar}}
+  {{> navigation_bar}}
 </template>
 
 <!-- Display a Recipe -->
@@ -35,7 +35,11 @@
   <a href="/view/{{_id}}" class="recipeItem">
     <div class="recipeOuter container">
       <div class="imageContainer">
-        <div class="imagePlaceholder"></div>
+        {{#if foodImg}}
+          <img class="homeRecipeImage homeImage" src="/cfs/files/images/{{foodImg}}"/>
+        {{else}}
+          <div class="imagePlaceholder homeImage"></div>
+        {{/if}}
       </div>
       <div class="recipeInner">
         <div class="recipeName">
