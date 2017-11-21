@@ -34,11 +34,9 @@
 <template name="recipe">
   <a href="/view/{{_id}}" class="recipeItem">
     <div class="recipeOuter container">
-      <div class="imageContainer">
+      <div class="homeImage">
         {{#if foodImg}}
-          <img class="homeRecipeImage homeImage" src="/cfs/files/images/{{foodImg}}"/>
-        {{else}}
-          <div class="imagePlaceholder homeImage"></div>
+          <img class="homeRecipeImage" src="/cfs/files/images/{{foodImg}}"/>
         {{/if}}
       </div>
       <div class="recipeInner">
