@@ -82,11 +82,10 @@ Template.App_plan.events({
           curr.meal, curr.servings, curr.ingredients,
           curr.instructions, curr.keywords, fileObj._id, undefined, Meteor.userId());
         alert("Recipe saved successfully!");
-        FlowRouter.go("/");
       });
     });
   }
-})
+});
 
 Template.App_plan.onCreated(function() {
   Meteor.subscribe('images.all');

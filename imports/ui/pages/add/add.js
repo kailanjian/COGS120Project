@@ -32,7 +32,7 @@ function initializePage() {
   if (!id.get())
     return;
 
-  var r = $("<a href=\"/\" id=\"delete_button\" class=\"btn btn-default add_bottom_buttons\" >delete</a>");
+  let r = $("<span id=\"delete_button\" class=\"btn btn-default add_bottom_buttons\" >delete</span>");
   $(".go_home").append(r);
   $(".add_bottom_buttons").css("width", "27%");
 
@@ -94,8 +94,11 @@ Template.App_add.events({
     $("#recipe-photo-input").click();
   },
   "click #delete_button"(event) {
-    console.log("deleting: " + id.get());
-    Meteor.call("recipes.delete", id.get());
+    if(confirm("Are you sure you want to delete this recipe?")){
+      console.log("deleting: " + id.get());
+      Meteor.call("recipes.delete", id.get());
+      FlowRouter.go('/');
+    }
   },
   "change #recipe-photo-input"(event) {
     $(".recipe_photo_button").text("added recipe photo");
