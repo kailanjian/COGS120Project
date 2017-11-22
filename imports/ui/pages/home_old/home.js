@@ -202,6 +202,22 @@ Template.App_home_old.events({
   'click .menuButtonWrapper'(event) {
     $('.sideBarOverlay').show();
   },
+  'click #deleteRecipeButton'(event) {
+    if($('.bottom_navigation_buttons').is(":visible")){
+      $('.deleteButton').show();
+      $('.bottom_navigation_buttons').hide();
+      $('#homeDoneButton').show();
+    } else {
+      $('.deleteButton').hide();
+      $('.bottom_navigation_buttons').show();
+      $('#homeDoneButton').hide();
+    }
+  },
+  'click #homeDoneButton'(event) {
+    $('.deleteButton').hide();
+    $('#homeDoneButton').hide();
+    $('.bottom_navigation_buttons').show();
+  },
   'input .searchBar'(event) {
     let text = $(".searchInput").val();
     searchText.set(text);
