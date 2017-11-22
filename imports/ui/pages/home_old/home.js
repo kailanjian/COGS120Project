@@ -181,6 +181,15 @@ Template.recipeOld.onRendered( function(){
   $('.deleteButton').hide();
 });
 
+Template.recipeOld.events({
+  'click .deleteButton'(event) {
+    event.preventDefault();
+    console.log("minus clicked");
+    console.log(this._id);
+    Meteor.call("recipes.delete", this._id);
+  }
+});
+
 Template.App_home_old.helpers({
   recipeGroups() {
     return recipeGroups.get();
