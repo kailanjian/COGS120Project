@@ -25,7 +25,7 @@
     {{/if}}
   </div>
   {{#each recipeGroups}}
-    {{> recipeGroup}}
+    {{> recipeGroupOld}}
   {{/each}}
 
   {{> navigation_bar}}
@@ -60,4 +60,17 @@
   <div class="go_home" id="homeDoneButton">
     <span class="btn btn-default">done</span>
   </div>
+</template>
+
+<template name="recipeGroupOld">
+  {{#if recipes}}
+    <div class="groupBar container">
+      <span>{{name}}</span>
+    </div>
+    <div class="groupContent">
+      {{#each recipes}}
+        {{> recipe}}
+      {{/each}}
+    </div>
+  {{/if}}
 </template>

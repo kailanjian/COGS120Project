@@ -213,6 +213,7 @@ Template.recipeGroup.onCreated(function () {
 
 Template.recipeGroup.helpers({
   recipes() {
+    console.log("recipeGroup recipe helper");
     var classifier = this.classifier;
     // important to activate Tracker
     var search = searchText.get();

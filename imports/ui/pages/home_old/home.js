@@ -208,11 +208,13 @@ Template.App_home_old.events({
   }
 });
 
-Template.recipeGroup.onCreated(function () {
+
+Template.recipeGroupOld.onCreated(function () {
 });
 
-Template.recipeGroup.helpers({
+Template.recipeGroupOld.helpers({
   recipes() {
+    console.log("recipeGroupOld recipe helper");
     var classifier = this.classifier;
     // important to activate Tracker
     var search = searchText.get();
