@@ -2,7 +2,7 @@ import "./navbar.html"
 
 import { Meteor } from 'meteor/meteor';
 
-var selectedColor = '#3a86d1';
+var selectedColor = '#4275AE';
 
 Template.navigation_bar.onRendered(function(){
   console.log(FlowRouter.getRouteName());
