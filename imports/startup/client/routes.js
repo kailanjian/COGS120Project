@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/home_old/home.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/add/add.js';
 import '../../ui/pages/view/view.js';
@@ -22,6 +23,18 @@ FlowRouter.route('/', {
   }],
   action() {
     BlazeLayout.render('App_body', { main: 'App_home' });
+  },
+});
+
+FlowRouter.route('/nani', {
+  name: 'App.home_old',
+  // figure out how to apply this trigger to all login pages
+  triggersEnter: [function(context, redirect) {
+    if (!Meteor.user() && !Meteor.loggingIn())
+      redirect('/login');
+  }],
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_home_old' });
   },
 });
 

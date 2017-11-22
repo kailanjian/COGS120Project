@@ -1,0 +1,63 @@
+<template name="App_home_old">
+  <div class="container">
+    <div class="top">
+      <div class="titleBar">
+        <span class="h1 title">recipes</span>
+        <span class="addAndDeleteButtonWrapper homeMinusButton">
+        <i class="fa fa-minus" id="deleteRecipeButton" aria-hidden="true"></i>
+      </span>
+        <a href="/add" class="addAndDeleteButtonWrapper">
+          <h2>+</h2>
+        </a>
+      </div>
+      <div class="searchBar text-center">
+        <input type="text" placeholder="search names and diet preferences" class="form-control searchInput"/>
+        <!--<button type="button" class="btn btn-default filterButton">filter</button>-->
+      </div>
+    </div>
+    {{#if noRecipes}}
+      <div class="no_recipes">
+        <h5 class="centered">Oh no! You don't have any recipes.</h5>
+        <span class="centered no_recipes_instructions">Click On</span>
+        <span class="centered no_recipes_instructions">'navigate' -> 'input recipes' </span>
+        <span class="centered no_recipes_instructions">to add recipes. </span>
+      </div>
+    {{/if}}
+  </div>
+  {{#each recipeGroups}}
+    {{> recipeGroup}}
+  {{/each}}
+
+  {{> navigation_bar}}
+  <div class="sideBarOverlay">
+    <div class="sideBar">
+      <div class="container">
+        <div class="sideBarUser">
+          <div class="userImg"></div>
+          <div class="userName">{{UserName}}</div>
+        </div>
+        <a href="/diet" class="sideBarButton whiteSideBar">
+          <!-- link to new page -->
+          <div class="iconCircle"><i class="fa fa-heart"></i></div>
+          <div class="buttonTitle">diet guidelines</div>
+        </a>
+        <a href="/add" class="sideBarButton">
+          <div class="iconCircle"><i class="fa fa-pencil"></i></div>
+          <div class="buttonTitle">input recipe</div>
+        </a>
+        <a href="#" class="sideBarButton removeRecipeButton">
+          <div class="iconCircle"><i class="fa fa-minus"></i></div>
+          <div class="buttonTitle">remove recipes</div>
+        </a>
+        <a href="#" class="sideBarButton logoutButton">
+          <div class="iconCircle"><i class="fa fa-sign-out"></i></div>
+          <div class="buttonTitle">Log Out</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="go_home" id="homeDoneButton">
+    <span class="btn btn-default">done</span>
+  </div>
+</template>
