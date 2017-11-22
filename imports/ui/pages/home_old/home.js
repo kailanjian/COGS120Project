@@ -177,6 +177,10 @@ Template.App_home_old.onRendered( function() {
   $('#homeDoneButton').hide();
 });
 
+Template.recipeOld.onRendered( function(){
+  $('.deleteButton').hide();
+});
+
 Template.App_home_old.helpers({
   recipeGroups() {
     return recipeGroups.get();

@@ -69,8 +69,34 @@
     </div>
     <div class="groupContent">
       {{#each recipes}}
-        {{> recipe}}
+        {{> recipeOld}}
       {{/each}}
     </div>
   {{/if}}
+</template>
+
+<template name="recipeOld">
+  <a href="/view/{{_id}}" class="recipeItem">
+    <div class="recipeOuter container">
+      <div class="deleteButton">
+        <span class="fa fa-trash deleteIcon"></span>
+      </div>
+      <div class="homeImage">
+        {{#if foodImg}}
+          <img class="homeRecipeImage" src="/cfs/files/images/{{foodImg}}"/>
+        {{/if}}
+      </div>
+      <div class="imageContainer">
+        <div class="imagePlaceholder"></div>
+      </div>
+      <div class="recipeInner">
+        <div class="recipeName">
+          {{name}}
+        </div>
+        <div class="recipeDetails">
+          {{time}} min | {{difficulty}} | {{meal}}
+        </div>
+      </div>
+    </div>
+  </a>
 </template>
