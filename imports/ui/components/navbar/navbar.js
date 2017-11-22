@@ -10,6 +10,7 @@ Template.navigation_bar.onRendered(function(){
     case "App.diet":
       $("#diet_nav").css('color', selectedColor);
       break;
+    case "App.home_old":
     case "App.home":
       $("#recipes_nav").css('color', selectedColor);
       break;
@@ -19,4 +20,4 @@ Template.navigation_bar.onRendered(function(){
     default:
       $("#help_nav").css('color', selectedColor);
   }
-})
+});
