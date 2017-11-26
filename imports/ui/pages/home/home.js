@@ -154,29 +154,6 @@ Template.App_home.onCreated(function() {
       }
     });
     recipeGroups.set(temp);
-
-    $(document).ready(function() {
-      console.log("APPENDING TO HEAD");
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.innerHTML = 
-     `function utmx_section(){}function utmx(){}(function(){var
-      k='165201803-0',d=document,l=d.location,c=d.cookie;
-      if(l.search.indexOf('utm_expid='+k)>0)return;
-      function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-      indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-      length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-      '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-      '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-      '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-      valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-      '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();`;
-      $("head").append(s);
-
-      var s = document.createElement("script");
-      s.type="text/javascript";
-      s.innerHTML = `utmx('url','A/B');`;
-    });
   });
   searchText  = new ReactiveVar("");
 
