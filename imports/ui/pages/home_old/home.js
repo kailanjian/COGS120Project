@@ -177,6 +177,19 @@ Template.App_home_old.onRendered( function() {
   $('#homeDoneButton').hide();
 });
 
+Template.recipeOld.onRendered( function(){
+  $('.deleteButton').hide();
+});
+
+Template.recipeOld.events({
+  'click .deleteButton'(event) {
+    event.preventDefault();
+    console.log("minus clicked");
+    console.log(this._id);
+    Meteor.call("recipes.delete", this._id);
+  }
+});
+
 Template.App_home_old.helpers({
   recipeGroups() {
     return recipeGroups.get();
@@ -201,6 +214,22 @@ Template.App_home_old.events({
   },
   'click .menuButtonWrapper'(event) {
     $('.sideBarOverlay').show();
+  },
+  'click #deleteRecipeButton'(event) {
+    if($('.bottom_navigation_buttons').is(":visible")){
+      $('.deleteButton').show();
+      $('.bottom_navigation_buttons').hide();
+      $('#homeDoneButton').show();
+    } else {
+      $('.deleteButton').hide();
+      $('.bottom_navigation_buttons').show();
+      $('#homeDoneButton').hide();
+    }
+  },
+  'click #homeDoneButton'(event) {
+    $('.deleteButton').hide();
+    $('#homeDoneButton').hide();
+    $('.bottom_navigation_buttons').show();
   },
   'input .searchBar'(event) {
     let text = $(".searchInput").val();

@@ -60,7 +60,7 @@ Template.App_plan.helpers({
       return recipeDataDynamic.get();
     return recipeDataDynamic;
   }
-})
+});
 
 Template.App_plan.events({
   "click .saveButton"(event) {
@@ -89,7 +89,7 @@ Template.App_plan.events({
 
 Template.App_plan.onCreated(function() {
   Meteor.subscribe('images.all');
-  for(var i = 0; i < 20; i++){
+  for(var i = 0; i < 10; i++){
     recipeDataMock.push(recipeDataMock[i]);
   }
 
@@ -130,10 +130,10 @@ Template.internetRecipe.events({
   'click #seeMore' (event) {
     let uncle = event.target.parentElement.previousElementSibling;
     if($(uncle).is(":visible")) {
-      $(uncle).hide();
+      $(uncle).slideUp();
       $(event.target).text("show more...")
     } else {
-      $(uncle).show();
+      $(uncle).slideDown();
       $(event.target).text("see less...")
     }
   }

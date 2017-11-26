@@ -1,0 +1,23 @@
+<template name="App_help">
+  <div class="container planTitleBar">
+    <span class="h1 title">help</span>
+  </div>
+  <div class="bottom_element">
+    {{#each topics}}
+      {{> help_topic}}
+    {{/each}}
+    {{> navigation_bar}}
+  </div>
+</template>
+
+<template name="help_topic">
+  <div class="groupBar helpGroup">
+    <div class="container helpTopicTitle">
+      <span class="h5 title helpTitleText">{{title}}</span>
+      <i class="dropdown fa fa-chevron-down" aria-hidden="true"></i>
+    </div>
+    <div class="container helpInstructions">
+      {{{content}}}
+    </div>
+  </div>
+</template>

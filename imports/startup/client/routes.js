@@ -14,7 +14,7 @@ import '../../ui/pages/plan/plan.js';
 import '../../ui/pages/diet/diet.js';
 import '../../ui/pages/login/login.js';
 import '../../ui/pages/signup/signup.js';
-//import { console } from 'meteor/tools';
+import '../../ui/pages/help/help.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -93,6 +93,13 @@ FlowRouter.route('/signup', {
   name: 'App.signup',
   action() {
     BlazeLayout.render('App_body', { main: 'App_signup' });
+  },
+});
+
+FlowRouter.route('/help', {
+  name: 'App.help',
+  action() {
+    BlazeLayout.render('App_body', { main: 'App_help' });
   },
 });
 
