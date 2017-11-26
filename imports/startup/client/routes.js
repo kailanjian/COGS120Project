@@ -100,7 +100,8 @@ Template.App_body.onCreated(function mainLayoutOnCreated() {
   const self = this;
   self.log = new ReactiveVar([]);
   self.currentIdentity = new ReactiveVar('No Identity Set');
-
+  console.log("analytics")
+  console.log(analytics)
   // We don't want to register analytics if it has been blocked by an adblocker.
   if (typeof analytics === 'undefined') return;
 
