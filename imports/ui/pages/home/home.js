@@ -3,6 +3,7 @@ import { Diets } from '/imports/api/diets/diets.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { analytics } from 'meteor/okgrow:analytics';
 
 import './home.html';
 

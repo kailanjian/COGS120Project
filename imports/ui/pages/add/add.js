@@ -7,6 +7,7 @@ import {Recipes} from '/imports/api/recipes/recipes.js';
 import {Images} from '/imports/api/images/images.js';
 
 import {DietOptions} from '/imports/api/dietoptions/dietoptions.js';
+import { analytics } from 'meteor/okgrow:analytics';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
@@ -140,6 +141,8 @@ Template.App_add.events({
     console.log("trying to save " + name + "...");
     console.log("saving keywords: ");
     console.log(tagInput.get() + " as " + tagInput.get().join(", "));
+
+    analytics.track("click", {category: "add"})
 
     difficultyInput = difficulty;
     mealInput = meal;
