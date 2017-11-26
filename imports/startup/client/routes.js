@@ -14,14 +14,21 @@ import '../../ui/pages/plan/plan.js';
 import '../../ui/pages/diet/diet.js';
 import '../../ui/pages/login/login.js';
 import '../../ui/pages/signup/signup.js';
+//import { console } from 'meteor/tools';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
   name: 'App.home',
   // figure out how to apply this trigger to all login pages
   triggersEnter: [function(context, redirect) {
+    let variation = getExperimentVariation();
+    if (variation == 1) {
+      redirect('/nani');
+    }
+
     if (!Meteor.user() && !Meteor.loggingIn())
       redirect('/login');
+    
   }],
   action() {
     BlazeLayout.render('App_body', { main: 'App_home' });
@@ -125,7 +132,30 @@ Template.App_body.onCreated(function mainLayoutOnCreated() {
     latest.push(`Track: ${event}`);
     self.log.set(latest);
   });
+
+
+  //TODO variation picking works. make it global, then route the home page with it
+
 });
+
+let variation = undefined;
+function getExperimentVariation() {
+  if (variation) {
+    return variation;
+  }
+  console.log('doing experiment');
+  let chosenVar = cxApi.getChosenVariation();
+  if (chosenVar == cxApi.NO_CHOSEN_VARIATION) {
+    console.log("variation not found, generating");
+    let newVar = cxApi.chooseVariation();
+    console.log("picked variation " + newVar);
+    cxApi.setChosenVariation(newVar);
+    chosenVar = newVar;
+  }
+  console.log("chosen variation is " + chosenVar);
+  variation = chosenVar;
+  return variation;
+}
 
 Template.App_body.onRendered(function mainLayoutOnRendered() {
   Tracker.autorun(() => {
