@@ -142,7 +142,6 @@ Template.App_add.events({
     console.log("saving keywords: ");
     console.log(tagInput.get() + " as " + tagInput.get().join(", "));
 
-    analytics.track("click", {category: "add"})
 
     difficultyInput = difficulty;
     mealInput = meal;
@@ -217,6 +216,7 @@ Template.App_add.events({
                     Meteor.userId());
                     FlowRouter.go("/view/"+id.get());
             } else {
+                analytics.track("click", {category: "add"})
                 console.log("inserting recipe");
                 Meteor.call('recipes.insert',
                     name,
