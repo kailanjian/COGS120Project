@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { analytics } from 'meteor/okgrow:analytics';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -93,3 +94,39 @@ FlowRouter.notFound = {
     BlazeLayout.render('App_body', { main: 'App_notFound' });
   },
 };
+
+Template.mainLayout.onCreated(function mainLayoutOnCreated() {
+  const self = this;
+  self.log = new ReactiveVar([]);
+  self.currentIdentity = new ReactiveVar('No Identity Set');
+
+  // We don't want to register analytics if it has been blocked by an adblocker.
+  if (typeof analytics === 'undefined') return;
+
+  self.currentIdentity.set(analytics._user._getTraits().email || 'No Identity Set');
+
+  analytics.on('page', (event, properties, options) => {
+    const latest = self.log.get();
+    latest.push(`Page: ${options.path}`);
+    self.log.set(latest);
+  });
+
+  analytics.on('identify', (event, properties) => {
+    const latest = self.log.get();
+    latest.push(`Identify: ${properties.email}`);
+    self.log.set(latest);
+    self.currentIdentity.set(properties.email);
+  });
+
+  analytics.on('track', (event) => {
+    const latest = self.log.get();
+    latest.push(`Track: ${event}`);
+    self.log.set(latest);
+  });
+});
+
+Template.mainLayout.onRendered(function mainLayoutOnRendered() {
+  Tracker.autorun(() => {
+    document.title = FlowRouter.getRouteName();
+  });
+});
