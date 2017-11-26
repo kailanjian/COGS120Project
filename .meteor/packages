@@ -29,3 +29,4 @@ accounts-password
 cfs:standard-packages
 cfs:gridfs
 cfs:ui
+okgrow:analytics
