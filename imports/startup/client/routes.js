@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { Tracker } from 'meteor/tracker';
 import { analytics } from 'meteor/okgrow:analytics';
 
 // Import needed templates
@@ -95,7 +96,7 @@ FlowRouter.notFound = {
   },
 };
 
-Template.mainLayout.onCreated(function mainLayoutOnCreated() {
+Template.App_body.onCreated(function mainLayoutOnCreated() {
   const self = this;
   self.log = new ReactiveVar([]);
   self.currentIdentity = new ReactiveVar('No Identity Set');
@@ -125,7 +126,7 @@ Template.mainLayout.onCreated(function mainLayoutOnCreated() {
   });
 });
 
-Template.mainLayout.onRendered(function mainLayoutOnRendered() {
+Template.App_body.onRendered(function mainLayoutOnRendered() {
   Tracker.autorun(() => {
     document.title = FlowRouter.getRouteName();
   });
