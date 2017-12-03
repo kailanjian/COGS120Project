@@ -19,6 +19,7 @@ var id = new ReactiveVar("");
 
 Template.App_add.onRendered(function () {
   $("#foodPicture").hide();
+  $("#recipePhoto").hide();
 });
 
 function imageSource(imageID) {
@@ -29,6 +30,11 @@ function showFoodPicture(source) {
   $("#foodPicture").attr('src', source).show();
   $("#galleryButton").hide();
   $("#foodPhotoDescription").text("change food photo");
+}
+
+function showRecipePicture(source) {
+  $("#recipePhoto").attr('src', source).show();
+  $(".recipe_photo_button").text("change recipe photo");
 }
 
 
@@ -49,6 +55,10 @@ function initializePage() {
 
   if (recipe.foodImg) {
     showFoodPicture(imageSource(recipe.foodImg));
+  }
+
+  if (recipe.recipeImg) {
+    showRecipePicture(imageSource(recipe.recipeImg));
   }
 
   let r = $("<span id=\"delete_button\" class=\"btn btn-default add_bottom_buttons\" >delete</span>");
@@ -113,6 +123,16 @@ Template.pictureHolder.events({
   },
 });
 
+function fileInputShowPhoto (event, showPictureFunction) {
+  let file = event.originalEvent.srcElement.files[0];
+  let reader = new FileReader();
+
+  reader.onloadend = function () {
+    showPictureFunction(reader.result);
+  };
+  reader.readAsDataURL(file);
+}
+
 Template.App_add.events({
   "click .recipe_photo_button"(event) {
     event.preventDefault();
@@ -126,18 +146,10 @@ Template.App_add.events({
     }
   },
   "change #file-input" (event) {
-    let file = event.originalEvent.srcElement.files[0];
-    let reader = new FileReader();
-
-    reader.onloadend = function () {
-      showFoodPicture(reader.result);
-    };
-    reader.readAsDataURL(file);
-
-    console.log("hihihi");
+    fileInputShowPhoto(event, showFoodPicture);
   },
   "change #recipe-photo-input"(event) {
-    $(".recipe_photo_button").text("added recipe photo");
+    fileInputShowPhoto(event, showRecipePicture);
   },
   "input .keywordInput"(event) {
     let input = event.currentTarget.value.trim();

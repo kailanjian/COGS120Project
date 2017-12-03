@@ -1,6 +1,7 @@
 <template name="App_add">
   {{>pictureHolder}}
   <input id="file-input" type="file" name="name" style="display: none;" accept="image/."/>
+  <input id="recipe-photo-input" type="file" name="name" style="display: none;" accept="image/."/>
   <div class="bottom_element">
     <div class="container">
       <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name" required>
@@ -24,10 +25,10 @@
       </div>
       <div class="centered">
         <form class="centered">
-          <input id="recipe-photo-input" type="file" name="name" style="display: none;" accept="image/."/>
           <button class="btn recipe_photo_button">add recipe photo</button>
         </form>
       </div>
+      <img id="recipePhoto" style="margin-top: .5rem"/>
       <div>
         <select class="form-control keywordInput keywords">
           <option value="">add a diet preference...</option>
