@@ -288,11 +288,14 @@ Template.App_add.events({
         return false;
       }
 
+      /*
       if (difficultyInput == null || mealInput == null) {
         alert("Please select the difficulty/time of the meal!");
         return false;
       }
+      */
 
+      /*
       if (!time) {
         alert("Please add in how much time it takes to make!")
         return false;
@@ -302,11 +305,13 @@ Template.App_add.events({
         alert("Please indicate the number of servings this recipe has!")
         return false;
       }
+      */
 
       if (!recipeFile && !instructions) {
         alert("Please input instructions!");
         return false;
       }
+
       if (!recipeFile && !ingredients) {
         alert("Please input ingredients!");
         return false;

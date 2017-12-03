@@ -10,18 +10,26 @@
       <div class="view_recipe_name">{{name}}</div>
       <div class="difficulty_and_servings">
         <div class="inline">
-          <span>{{difficulty}} difficulty</span>
+          {{#if difficulty}}
+            <span>{{difficulty}} difficulty</span>
+          {{/if}}
         </div>
         <div class="inline text_and_input">
-          <span>{{servings}} servings</span>
+          {{#if servings}}
+            <span>{{servings}} servings</span>
+          {{/if}}
         </div>
       </div>
       <div class="meal">
         <div class="inline">
-          <span>{{meal}}</span>
+          {{#if meal}}
+            <span>{{meal}}</span>
+          {{/if}}
         </div>
         <div class="text_and_input time">
-          <span>preparation time: {{time}} min</span>
+          {{#if time}}
+            <span>preparation time: {{time}} min</span>
+          {{/if}}
         </div>
       </div>
       <div class="recipeImgContainer">
@@ -31,19 +39,25 @@
         {{/if}}
       </div>
       <div>
+        {{#if ingredients}}
         <span class="h2">Ingredients: </span>
         <br />
         <span class="keep-whitespace">{{ingredients}}</span>
+        {{/if}}
 
         <br />
+        {{#if instructions}}
         <span class="h2">Instructions: </span>
         <br />
         <span class="keep-whitespace">{{instructions}}</span>
+        {{/if}}
 
         <br />
+        {{#if keywords}}
         <span class="h2">Keywords: </span>
         <br />
         <span>{{keywords}}</span>
+        {{/if}}
       </div>
     </div>
   </div>
