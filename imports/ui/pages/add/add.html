@@ -1,12 +1,6 @@
 <template name="App_add">
-  <div class="picture_holder">
-    <div class="centered">
-      {{>galleryButton}}
-    </div>
-    <div class="centered add_text">
-      <span id="foodPhotoDescription">add food photo</span>
-    </div>
-  </div>
+  {{>pictureHolder}}
+  <input id="file-input" type="file" name="name" style="display: none;" accept="image/."/>
   <div class="bottom_element">
     <div class="container">
       <input type="text" placeholder="Add Recipe Name" class="form-control recipe_name" required>
@@ -69,8 +63,7 @@
 
 
 <template name = "galleryButton">
-  <input id="file-input" type="file" name="name" style="display: none;" accept="image/."/>
-  <button class = "add_food_photo_button galleryButton btn btn-default" onclick = "document.getElementById('file-input').click();"><i class="fa fa-picture-o"></i></button>
+  <button class = "add_food_photo_button galleryButton btn btn-default"><i class="fa fa-picture-o"></i></button>
 </template>
 
 <template name = "difficulty">
@@ -91,6 +84,18 @@
   </select>
 </template>
 
+
+<template name = "pictureHolder">
+  <div class="picture_holder">
+    <img id="foodPicture"/>
+    <div class="centered" id="galleryButton">
+      {{>galleryButton}}
+    </div>
+    <div class="centered add_text">
+      <span id="foodPhotoDescription">add food photo</span>
+    </div>
+  </div>
+</template>
 
 <!--
 <template name="tagInput">
