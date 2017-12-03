@@ -93,7 +93,7 @@
           {{name}}
         </div>
         <div class="recipeDetails">
-          {{time}} min | {{difficulty}} | {{meal}}
+          {{#if time}}{{time}} min{{else}} - {{/if}}| {{#unless difficulty}}-{{/unless}}{{difficulty}} | {{#unless meal}}-{{/unless}}{{meal}}
         </div>
       </div>
     </div>

@@ -22,9 +22,14 @@ FlowRouter.route('/', {
   // figure out how to apply this trigger to all login pages
   triggersEnter: [function(context, redirect) {
     let variation = getExperimentVariation();
+    
+    /*
+    A/B testing code
+    UNCOMMENT TO ACTIVATE A/B TEST ALT PAGE
     if (variation == 1) {
       redirect('/nani');
     }
+    */
 
     if (!Meteor.user() && !Meteor.loggingIn())
       redirect('/login');
