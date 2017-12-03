@@ -1,69 +1,69 @@
 <template name="App_view">
   {{#with currentRecipe}}
-  <div class="picture_holder">
-    {{#if foodImg}}
-      <img class="recipeImg" src="/cfs/files/images/{{foodImg}}"/>
-    {{/if}}
-  </div>
-  <div class="bottom_element">
-    <div class="container">
-      <div class="view_recipe_name">{{name}}</div>
-      <div class="difficulty_and_servings">
-        <div class="inline">
-          {{#if difficulty}}
-            <span>{{difficulty}} difficulty</span>
+    <div class="picture_holder">
+      {{#if foodImg}}
+        <img class="recipeImg" src="/cfs/files/images/{{foodImg}}"/>
+      {{/if}}
+    </div>
+    <div class="bottom_element">
+      <div class="container">
+        <div class="view_recipe_name">{{name}}</div>
+        <div class="difficulty_and_servings">
+          <div class="inline">
+            {{#if meal}}
+              <span>meal: {{meal}}</span>
+            {{/if}}
+          </div>
+          <div class="inline text_and_input">
+            {{#if servings}}
+              <span>{{servings}} servings</span>
+            {{/if}}
+          </div>
+        </div>
+        <div class="meal">
+          <div class="inline">
+            {{#if difficulty}}
+              <span>difficulty: {{difficulty}}</span>
+            {{/if}}
+          </div>
+          <div class="text_and_input time">
+            {{#if time}}
+              <span>preparation time: {{time}} min</span>
+            {{/if}}
+          </div>
+        </div>
+        <div class="recipeImgContainer">
+          <!--// recipe image here-->
+          {{#if recipeImg}}
+            <img src="/cfs/files/images/{{recipeImg}}" class="recipeImg"/>
           {{/if}}
         </div>
-        <div class="inline text_and_input">
-          {{#if servings}}
-            <span>{{servings}} servings</span>
+        <div>
+          {{#if ingredients}}
+            <span class="h2">Ingredients: </span>
+            <br/>
+            <span class="keep-whitespace">{{ingredients}}</span>
           {{/if}}
-        </div>
-      </div>
-      <div class="meal">
-        <div class="inline">
-          {{#if meal}}
-            <span>{{meal}}</span>
-          {{/if}}
-        </div>
-        <div class="text_and_input time">
-          {{#if time}}
-            <span>preparation time: {{time}} min</span>
-          {{/if}}
-        </div>
-      </div>
-      <div class="recipeImgContainer">
-        <!--// recipe image here-->
-        {{#if recipeImg}}
-          <img src="/cfs/files/images/{{recipeImg}}" class="recipeImg"/>
-        {{/if}}
-      </div>
-      <div>
-        {{#if ingredients}}
-        <span class="h2">Ingredients: </span>
-        <br />
-        <span class="keep-whitespace">{{ingredients}}</span>
-        {{/if}}
 
-        <br />
-        {{#if instructions}}
-        <span class="h2">Instructions: </span>
-        <br />
-        <span class="keep-whitespace">{{instructions}}</span>
-        {{/if}}
+          <br/>
+          {{#if instructions}}
+            <span class="h2">Instructions: </span>
+            <br/>
+            <span class="keep-whitespace">{{instructions}}</span>
+          {{/if}}
 
-        <br />
-        {{#if keywords}}
-        <span class="h2">Keywords: </span>
-        <br />
-        <span>{{keywords}}</span>
-        {{/if}}
+          <br/>
+          {{#if keywords}}
+            <span class="h2">Diet Preferences: </span>
+            <br/>
+            <span>{{keywords}}</span>
+          {{/if}}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="go_home">
-    <a href="/" id="homeButton" class="btn btn-default add_bottom_buttons">home</a>
-    <a href="/add/{{_id}}" id="editButton" class="btn btn-default add_bottom_buttons">edit</a>
-  </div>
+    <div class="go_home">
+      <a href="/" id="homeButton" class="btn btn-default add_bottom_buttons">home</a>
+      <a href="/add/{{_id}}" id="editButton" class="btn btn-default add_bottom_buttons">edit</a>
+    </div>
   {{/with}}
 </template>
