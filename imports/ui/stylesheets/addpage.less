@@ -1,47 +1,54 @@
 body {
-    background-color: @base;
-  }
+  background-color: @base;
+}
 
 span {
   font-size: 16px;
 }
 
-.picture_holder{
+#foodPicture, #recipePhoto {
+  width: 100%;
+  pointer-events: none;
+}
+
+.picture_holder {
   background-color: @secondary;
 }
 
-.centered{
+.centered {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%
 }
 
-.add_text{
+.add_text {
   top: 50px;
   color: @highlight;
+  pointer-events: none;
 }
 
-.add_food_photo_button{
-    font-size:35px !important;
-    position: relative;
-    background-color: @primary;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 7px;
-    margin-bottom: 7px;
-    border-radius: 100px !important;
+.add_food_photo_button {
+  font-size: 35px !important;
+  position: relative;
+  background-color: @primary;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  border-radius: 100px !important;
+  pointer-events: none;
 }
 
-.recipe_photo_button{
-    background-color: @secondary;
-    width: 90%;
-    font-size: 20px;
-    border-radius: @border-radius;
-    padding: 0px;
+.recipe_photo_button {
+  background-color: @secondary;
+  width: 90%;
+  font-size: 20px;
+  border-radius: @border-radius;
+  padding: 0px;
 }
 
-.recipe_name{
+.recipe_name {
   border-width: medium;
   line-height: 0;
   margin-top: 10px;
@@ -50,7 +57,7 @@ span {
   background-color: inherit;
 }
 
-.selector_buttons{
+.selector_buttons {
   display: inline-block;
   padding: 1px;
   cursor: pointer;
@@ -58,54 +65,55 @@ span {
   margin-bottom: 5px;
 }
 
-.difficulty_and_servings{
+.difficulty_and_servings {
   display: flex;
   margin-top: .5rem;
   margin-bottom: .2rem;
 }
 
-.add_selector{
+.add_selector {
   height: 28px;
 }
 
-.meal{
+.meal {
   display: flex;
   margin-bottom: .5rem;
 }
 
-.inline{
+.inline {
   display: inline;
 }
 
-.text_and_input{
+.text_and_input {
   margin-left: auto;
 }
 
-.small_input{
-    width: 75px;
-    text-align: center;
+.small_input {
+  width: 75px;
+  text-align: center;
 }
 
-.big_text_field{
+.big_text_field {
   padding: 10px;
   margin-top: 10px;
   font-size: 13px;
   width: 100%;
+  resize: none;
 }
 
-.ingredients{
+.ingredients {
   height: 100px;
 }
 
-.instructions{
+.instructions {
   height: 300px;
 }
 
-.keywords{
+.keywords {
   margin-top: .7rem;
 }
 
-.go_home{
+.go_home {
   border-top: 1px solid darkgrey;
   position: fixed;
   bottom: 0;

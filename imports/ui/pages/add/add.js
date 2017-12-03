@@ -7,7 +7,7 @@ import {Recipes} from '/imports/api/recipes/recipes.js';
 import {Images} from '/imports/api/images/images.js';
 
 import {DietOptions} from '/imports/api/dietoptions/dietoptions.js';
-import { analytics } from 'meteor/okgrow:analytics';
+import {analytics} from 'meteor/okgrow:analytics';
 
 let difficultyInput = undefined;
 let mealInput = undefined;
@@ -17,11 +17,31 @@ let tagInput = new ReactiveVar([]);
 
 var id = new ReactiveVar("");
 
+Template.App_add.onRendered(function () {
+  $("#foodPicture").hide();
+  $("#recipePhoto").hide();
+});
+
+function imageSource(imageID) {
+  return "/cfs/files/images/" + imageID;
+}
+
+function showFoodPicture(source) {
+  $("#foodPicture").attr('src', source).show();
+  $("#galleryButton").hide();
+  $("#foodPhotoDescription").text("change food photo");
+}
+
+function showRecipePicture(source) {
+  $("#recipePhoto").attr('src', source).show();
+  $(".recipe_photo_button").text("change recipe photo");
+}
+
 
 function initializePage() {
   // initialize page data
   id.set(FlowRouter.current().params.id);
-  let recipe = Recipes.findOne(id.get())
+  let recipe = Recipes.findOne(id.get());
 
   // clear out globals
   difficultyInput = undefined;
@@ -32,6 +52,14 @@ function initializePage() {
 
   if (!id.get())
     return;
+
+  if (recipe.foodImg) {
+    showFoodPicture(imageSource(recipe.foodImg));
+  }
+
+  if (recipe.recipeImg) {
+    showRecipePicture(imageSource(recipe.recipeImg));
+  }
 
   let r = $("<span id=\"delete_button\" class=\"btn btn-default add_bottom_buttons\" >delete</span>");
   $(".go_home").append(r);
@@ -88,6 +116,22 @@ Template.App_add.helpers({
   }
 });
 
+Template.pictureHolder.events({
+  "click .picture_holder"(event) {
+    event.preventDefault();
+    $("#file-input").click();
+  },
+});
+
+function fileInputShowPhoto (event, showPictureFunction) {
+  let file = event.originalEvent.srcElement.files[0];
+  let reader = new FileReader();
+
+  reader.onloadend = function () {
+    showPictureFunction(reader.result);
+  };
+  reader.readAsDataURL(file);
+}
 
 Template.App_add.events({
   "click .recipe_photo_button"(event) {
@@ -95,14 +139,17 @@ Template.App_add.events({
     $("#recipe-photo-input").click();
   },
   "click #delete_button"(event) {
-    if(confirm("Are you sure you want to delete this recipe?")){
+    if (confirm("Are you sure you want to delete this recipe?")) {
       console.log("deleting: " + id.get());
       Meteor.call("recipes.delete", id.get());
       FlowRouter.go('/');
     }
   },
+  "change #file-input" (event) {
+    fileInputShowPhoto(event, showFoodPicture);
+  },
   "change #recipe-photo-input"(event) {
-    $(".recipe_photo_button").text("added recipe photo");
+    fileInputShowPhoto(event, showRecipePicture);
   },
   "input .keywordInput"(event) {
     let input = event.currentTarget.value.trim();
@@ -181,58 +228,58 @@ Template.App_add.events({
       }
     });
 
-    recipePhotoPromise.then(function(recipePhotoId) {
-        foodPhotoPromise.then(function(foodPhotoId) {
-            console.log("wow you used promises correctly");
-            let isValid = validateInputs(recipePhotoId);
+    recipePhotoPromise.then(function (recipePhotoId) {
+      foodPhotoPromise.then(function (foodPhotoId) {
+        console.log("wow you used promises correctly");
+        let isValid = validateInputs(recipePhotoId);
 
-            if (!recipePhotoId && recipeImg) 
-                recipePhotoId = recipeImg;
-            
-            if (!foodPhotoId && foodImg)
-                foodPhotoId = foodImg;
-            
-            if (!isValid) {
-                return;
-            }
+        if (!recipePhotoId && recipeImg)
+          recipePhotoId = recipeImg;
 
-            // is valid
-            if (id.get()) {
-                console.log("updating recipe");
-                console.log("id: " + id.get());
-                console.log("name: " + name);
-                console.log("difficulty: " + difficulty);
-                Meteor.call('recipes.update', id.get(),
-                    name,
-                    time,
-                    difficulty,
-                    meal,
-                    servings,
-                    ingredients,
-                    instructions,
-                    keywords,
-                    foodPhotoId,
-                    recipePhotoId,
-                    Meteor.userId());
-                    FlowRouter.go("/view/"+id.get());
-            } else {
-                analytics.track("click", {category: "add"})
-                console.log("inserting recipe");
-                Meteor.call('recipes.insert',
-                    name,
-                    time,
-                    difficulty,
-                    meal,
-                    servings,
-                    ingredients,
-                    instructions,
-                    keywords,
-                    foodPhotoId,
-                    recipePhotoId,
-                    Meteor.userId())
-                FlowRouter.go("/");
-            }
-        });
+        if (!foodPhotoId && foodImg)
+          foodPhotoId = foodImg;
+
+        if (!isValid) {
+          return;
+        }
+
+        // is valid
+        if (id.get()) {
+          console.log("updating recipe");
+          console.log("id: " + id.get());
+          console.log("name: " + name);
+          console.log("difficulty: " + difficulty);
+          Meteor.call('recipes.update', id.get(),
+            name,
+            time,
+            difficulty,
+            meal,
+            servings,
+            ingredients,
+            instructions,
+            keywords,
+            foodPhotoId,
+            recipePhotoId,
+            Meteor.userId());
+          FlowRouter.go("/view/" + id.get());
+        } else {
+          analytics.track("click", {category: "add"})
+          console.log("inserting recipe");
+          Meteor.call('recipes.insert',
+            name,
+            time,
+            difficulty,
+            meal,
+            servings,
+            ingredients,
+            instructions,
+            keywords,
+            foodPhotoId,
+            recipePhotoId,
+            Meteor.userId())
+          FlowRouter.go("/");
+        }
+      });
     });
 
     function validateInputs(recipeFile) {
@@ -351,12 +398,6 @@ Template.App_add.events({
     }
 
     */
-  }
-});
-
-Template.galleryButton.events({
-  'change #file-input': function (e) {
-    $('#foodPhotoDescription').text("added food photo");
   }
 });
 
