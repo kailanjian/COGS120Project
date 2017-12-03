@@ -24,15 +24,5 @@ export const DietOptions = [
   "paleo",
   "dairy-free-diet",
   "farm-fresh-diet",
-  "international-beauty-diet",
-  "jjjj",
-  "mmmm",
-  "nnnnn",
-  "qqqq",
-  "rrrr",
-  "ssss",
-  "tttt",
-  "uuuu",
-  "wwww",
-  "xxxx"
-]
+  "international-beauty-diet"
+];
